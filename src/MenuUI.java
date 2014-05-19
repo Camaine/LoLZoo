@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 
@@ -19,5 +22,20 @@ public class MenuUI extends JPanel
 		menu1.add(item2);
 		menu1.add(item3);
 		menu2.add(item4);
+	}
+	
+	public void MenuSelect()
+	{
+		item1.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 	}
 }
