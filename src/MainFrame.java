@@ -1,17 +1,20 @@
+import java.io.IOException;
+
 import javax.swing.JFrame;
 
 
 public class MainFrame extends JFrame
 {
-	public MainFrame()
+	public MainFrame() throws IOException
 	{
-		setSize(800,640);
+		setSize(800,600);
 		setTitle("LoL Zoo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MenuUI menu = new MenuUI();
-		Background img = new Background();
+		MainPanel img = new MainPanel();
 		setJMenuBar(menu.menubar);
 		add(img);
+
 		setVisible(true);
 	}
 }
