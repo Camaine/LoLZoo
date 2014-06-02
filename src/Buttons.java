@@ -15,7 +15,9 @@ public class Buttons extends JPanel
 {
 	JButton character_select = new JButton("Character Select");
 	JButton character1 = new JButton();
-	JButton character2 = new JButton("void");
+	JButton character2 = new JButton();
+	JButton character3 = new JButton();
+	JButton play = new JButton("Play");
 	MainPanel main;
 	
 	
@@ -28,8 +30,10 @@ public class Buttons extends JPanel
 		select_button();
 		
 		select_poro();
-		select_character1();
+		select_rengar();
+		select_elise();
 		add(character_select);
+		add(play);
 		
 
 	}
@@ -56,9 +60,30 @@ public class Buttons extends JPanel
 		character1.setPreferredSize(new Dimension(50, 50));
 	}
 
-	public void select_character1()
+	public void select_rengar()
 	{
+		try
+		{
+			Image img = ImageIO.read(new File(".\\Resource\\Rengar_Square_0.png"));
+			character2.setIcon(new ImageIcon(img));
+		}catch(IOException ex)
+		{
+			
+		}
 		character2.setPreferredSize(new Dimension(50, 50));
+	}
+	
+	public void select_elise()
+	{
+		try
+		{
+			Image img = ImageIO.read(new File(".\\Resource\\elise_icon.png"));
+			character3.setIcon(new ImageIcon(img));
+		}catch(IOException ex)
+		{
+			
+		}
+		character3.setPreferredSize(new Dimension(50, 50));
 	}
 
 	
