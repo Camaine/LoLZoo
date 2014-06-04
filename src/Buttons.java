@@ -69,7 +69,7 @@ public class Buttons extends JPanel
 	{
 		try
 		{
-			Image img = ImageIO.read(new File(".\\Resource\\Rengar_Square_0.png"));
+			Image img = ImageIO.read(new File(".\\Resource\\Rengar_icon.png"));
 			character2.setIcon(new ImageIcon(img));
 		}catch(IOException ex)
 		{
