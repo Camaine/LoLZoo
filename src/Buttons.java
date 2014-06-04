@@ -20,7 +20,6 @@ public class Buttons extends JPanel
 	JButton character4 = new JButton();
 	JButton character5 = new JButton();
 	JButton character6 = new JButton();
-	JButton play = new JButton("Play");
 	MainPanel main;
 	
 	
@@ -38,8 +37,7 @@ public class Buttons extends JPanel
 		select_ahri();
 		select_nidalee();
 		add(character_select);
-		add(play);
-		
+				
 
 	}
 
