@@ -30,8 +30,8 @@ public class MainPanel extends JPanel
 	Buttons button1 = new Buttons();
 	JRadioButton PoroButton = new JRadioButton("Poro");
 	JRadioButton RengarButton = new JRadioButton("Rengar");
-	JRadioButton AniviaButton = new JRadioButton("Anivia");
-	JRadioButton NasusButton = new JRadioButton("Nasus");
+	JRadioButton AhriButton = new JRadioButton("Ahri");
+	JRadioButton NidaleeButton = new JRadioButton("Nidalee");
 	JRadioButton EliseButton = new JRadioButton("Elise");
 	JRadioButton ShivanaButton = new JRadioButton("Shivana");
 	JRadioButton PatrolButton = new JRadioButton("Patrol");
@@ -46,14 +46,19 @@ public class MainPanel extends JPanel
 	Renga rg = new Renga();
 	Poro poro = new Poro();
 	Spider elise = new Spider();
+	Ahri ahri = new Ahri();
+	Nidalee nidalee = new Nidalee();
 	
-	Timer tm; 
+	Timer tm;
+	MouseListen Drag = new MouseListen();
 
 	public int check_poro = 0;
 	public int check_rengar = 0;
 	public int check_elise = 0;
+	public int check_ahri = 0;
+	public int check_nidalee = 0;
 	public int x1, y1, x2, y2;
-	public int ChampionMove, mousepress, clickcount = 0;
+	public int ChampionMove, mousepress = 0, clickcount = 0;
 	public int RengaPat = 0, PoroPat = 0;
 
 	int PoroStart = 0;
@@ -72,8 +77,8 @@ public class MainPanel extends JPanel
 		myCursor();
 		Group1.add(PoroButton);
 		Group1.add(RengarButton);
-		Group1.add(AniviaButton);
-		Group1.add(NasusButton);
+		Group1.add(AhriButton);
+		Group1.add(NidaleeButton);
 		Group1.add(EliseButton);
 		Group1.add(ShivanaButton);
 		Group2.add(PatrolButton);
@@ -106,6 +111,16 @@ public class MainPanel extends JPanel
 					elise.x1 = x1-70;
 					elise.y1 = y1-70;
 				}
+				case 104:
+				{
+					ahri.x1 = x1-70;
+					ahri.y1 = y1-70;
+				}
+				case 105:
+				{
+					nidalee.x1 = x1-70;
+					nidalee.y1 = y1-70;
+				}
 				}
 
 				repaint();
@@ -136,8 +151,8 @@ public class MainPanel extends JPanel
 		p2.setLayout(new GridLayout(2, 3));
 		p2.add(PoroButton);
 		p2.add(RengarButton);
-		p2.add(NasusButton);
-		p2.add(AniviaButton);
+		p2.add(NidaleeButton);
+		p2.add(AhriButton);
 		p2.add(EliseButton);
 		p2.add(ShivanaButton);
 		JPanel p4 = new JPanel();
@@ -148,7 +163,87 @@ public class MainPanel extends JPanel
 		repaint();
 
 	}
+	
+	public class MouseListen implements MouseListener
+	{
+		@Override
+		public void mouseClicked(MouseEvent e)
+		{
+			
+			System.out.println(clickcount);
+			if (clickcount == 2)
+			{
+				System.out.println("MainPanel_TAT");
+				clickcount = 0;
+				mousepress = 0;
+				action_poro = new PatrolAction(x1, y1, x2, y2);
+				tm = new Timer(100, new ActionListener()
+				{
 
+					@Override
+					public void actionPerformed(ActionEvent e)
+					{
+						action_poro.PatrolActions();
+						poro.x1 = action_poro.getX1();
+						poro.y1 = action_poro.getY1();
+						repaint();
+					}
+
+				});
+				tm.stop();
+				tm.setDelay(100);
+				tm.start();
+			}
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e)
+		{
+			if (mousepress == 0)
+			{
+				System.out.println("check1");
+				x1 = e.getX();
+				y1 = e.getY();
+				System.out.println("x1 :"+x1);
+				mousepress++;
+				clickcount = 1;
+			} 
+			else
+			{
+				System.out.println("check2");
+				x2 = e.getX();
+				y2 = e.getY();
+				System.out.println("x2 :"+x2);
+				mousepress = 0;
+				clickcount = 2;
+			}
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0)
+		{
+			// TODO Auto-generated method stub
+
+		}
+
+	
+	}
+	
 	public void paintComponent(Graphics g)
 	{
 		Graphics2D g2 = (Graphics2D) g;
@@ -166,6 +261,14 @@ public class MainPanel extends JPanel
 		if(check_elise == 1)
 		{
 			elise.draw(g2);
+		}
+		if(check_ahri == 1)
+		{
+			ahri.draw(g2);
+		}
+		if(check_nidalee == 1)
+		{
+			nidalee.draw(g2);
 		}
 
 	}
@@ -192,7 +295,7 @@ public class MainPanel extends JPanel
 			{
 
 				Object[] Field1 =
-				{ button1.character1, button1.character2, button1.character3,};
+				{ button1.character1, button1.character2, button1.character3, button1.character4, button1.character5};
 				int value = JOptionPane.showOptionDialog(null,
 						"Select Character", "Select Character",
 						JOptionPane.DEFAULT_OPTION, 0, null, Field1, Field1[i]);
@@ -239,6 +342,34 @@ public class MainPanel extends JPanel
 			}
 
 		});
+		
+		button1.character4.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				System.out.println("ahri");
+				check_ahri = 1;
+				repaint();
+			}
+
+		});
+		
+		button1.character5.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				System.out.println("nidalee");
+				check_nidalee = 1;
+				repaint();
+			}
+
+		});
+		
+		
 
 		PatrolButton.addActionListener(new ActionListener()
 		{
@@ -270,6 +401,7 @@ public class MainPanel extends JPanel
 			public void actionPerformed(ActionEvent arg0)
 			{
 				tm.stop();
+				System.out.println("STOP");
 				action_poro.xpoint1 = 0;
 				action_poro.ypoint1 = 0;
 				action_poro.xpoint2 = 0;
@@ -278,6 +410,9 @@ public class MainPanel extends JPanel
 				y1=0;
 				x2=0;
 				y2=0;
+				clickcount = 0;
+				mousepress = 0;
+				PatrolActions();			//한번더 호출해줘서 지우도록함
 			}
 			
 		});
@@ -297,93 +432,32 @@ public class MainPanel extends JPanel
 		{
 			ChampionMove = 103;
 		}
+		if(AhriButton.isSelected() && MoveButton.isSelected())
+		{
+			ChampionMove = 104;
+		}
+		if(NidaleeButton.isSelected() && MoveButton.isSelected())
+		{
+			ChampionMove = 105;
+		}
 	}
 
 	public void PatrolActions()
 	{
 		if (PoroButton.isSelected()&& PatrolButton.isSelected())
 		{
+			System.out.println("P_B : "+PoroButton.isSelected());
+			System.out.println("Patrol_Button : " + PatrolButton.isSelected());
 			System.out.println("Patrol");
-			clickcount = 0;
-			mousepress = 0;
-			addMouseListener(new MouseListener()
-			{
-
-				@Override
-				public void mouseClicked(MouseEvent e)
-				{
-					
-					System.out.println(clickcount);
-					if (clickcount == 2)
-					{
-						System.out.println("TAT");
-						action_poro = new PatrolAction(x1, y1, x2, y2);
-						tm = new Timer(100, new ActionListener()
-						{
-
-							@Override
-							public void actionPerformed(ActionEvent e)
-							{
-								action_poro.PatrolActions();
-								poro.x1 = action_poro.getX1();
-								poro.y1 = action_poro.getY1();
-								repaint();
-							}
-
-						});
-						tm.stop();
-						tm.setDelay(100);
-						tm.start();
-					}
-				}
-
-				@Override
-				public void mouseEntered(MouseEvent arg0)
-				{
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void mouseExited(MouseEvent arg0)
-				{
-					// TODO Auto-generated method stub
-
-				}
-
-				@Override
-				public void mousePressed(MouseEvent e)
-				{
-					if (mousepress == 0)
-					{
-						System.out.println("check1");
-						x1 = e.getX();
-						y1 = e.getY();
-						System.out.println("x1 :"+x1);
-						mousepress++;
-						clickcount = 1;
-					} else
-					{
-						System.out.println("check2");
-						x2 = e.getX();
-						y2 = e.getY();
-						System.out.println("x2 :"+x2);
-						mousepress = 0;
-						clickcount = 2;
-					}
-
-				}
-
-				@Override
-				public void mouseReleased(MouseEvent arg0)
-				{
-					// TODO Auto-generated method stub
-
-				}
-
-			});
+			//clickcount = 0;
+			//mousepress = 0;
+			addMouseListener(Drag);			//자주쓰니까 InnerClass로 바꿔서 코드를 이쁘게함
 		}
-		
+		if (StopButton.isSelected())		//Stop으로 재실행됬을때 이게실행되서 지워버림 ^오^
+		{
+			removeMouseListener(Drag);
+			System.out.println("FALSE DRAG ACT");
+		}
 	}
 	
 	public void Timers()
