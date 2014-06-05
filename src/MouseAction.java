@@ -123,13 +123,6 @@ public class MouseAction extends JPanel implements MouseInputListener
 
 	}
 	
-	public void StartTimer()
-	{
-		main.TmPoro.stop();
-		main.TmPoro.setDelay(100);
-		main.TmPoro.start();
-	}
-	
 	
 	public int getX1()
 	{

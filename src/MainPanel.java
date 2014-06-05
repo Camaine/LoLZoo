@@ -19,6 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -41,8 +42,8 @@ public class MainPanel extends JPanel
 	JRadioButton StopButton = new JRadioButton();
 	JRadioButton rift = new JRadioButton();
 	JRadioButton abyss = new JRadioButton();
-	ButtonGroup Group1 = new ButtonGroup();
-	ButtonGroup Group2 = new ButtonGroup();
+	public ButtonGroup Group1 = new ButtonGroup();
+	public ButtonGroup Group2 = new ButtonGroup();
 	ButtonGroup Group3 = new ButtonGroup();
 	ButtonIcons bti = new ButtonIcons();
 
@@ -57,13 +58,18 @@ public class MainPanel extends JPanel
 	PatrolAction action_ahri;
 	PatrolAction action_nidalee;
 
+	PoroPatrol poro_pat;
+	RengarPatrol rengar_pat;
+	ElisePatrol elise_pat;
+	AhriPatrol ahri_pat;
+	NidaleePatrol nidalee_pat;
+
 	Renga rg = new Renga();
 	Poro poro = new Poro();
 	Spider elise = new Spider();
 	Ahri ahri = new Ahri();
 	Nidalee nidalee = new Nidalee();
 
-	Timer tm1;
 	MouseListen Patroler = new MouseListen();
 
 	public int check_poro = 0;
@@ -79,9 +85,6 @@ public class MainPanel extends JPanel
 	int PoroStart = 0;
 	int RengarStart = 0;
 	int HowManyCome = 0;
-
-	Timer TmRengar;
-	Timer TmPoro;
 
 	MouseAction action = new MouseAction();
 
@@ -149,7 +152,7 @@ public class MainPanel extends JPanel
 				}
 				case 103:
 				{
-					if (HowManyCome == 0)
+					if (HowManyCome == 0 && ChampionMove == 103)
 					{
 						elise.x1 = x1 - 70;
 						elise.y1 = y1 - 70;
@@ -244,16 +247,40 @@ public class MainPanel extends JPanel
 					{
 						action_poro = new PatrolAction(x1, y1, x2, y2);
 						poro_patrol_check = 1;
+						poro_pat = new PoroPatrol();
+						poro_pat.start();
 
 					}
 					if (RengarButton.isSelected() && PatrolButton.isSelected())
 					{
 						action_rengar = new PatrolAction(x1, y1, x2, y2);
 						rengar_patrol_check = 1;
+						rengar_pat = new RengarPatrol();
+						rengar_pat.start();
 					}
-					HowManyCome += 1; // 패트롤이 한번시행되면 이 변수의 값이 증가하여
-					Timers();
-
+					if (EliseButton.isSelected() && PatrolButton.isSelected())
+					{
+						action_elise = new PatrolAction(x1, y1, x2, y2);
+						elise_patrol_check = 1;
+						elise_pat = new ElisePatrol();
+						elise_pat.start();
+					}
+					if (AhriButton.isSelected() && PatrolButton.isSelected())
+					{
+						action_ahri = new PatrolAction(x1, y1, x2, y2);
+						ahri_patrol_check = 1;
+						ahri_pat = new AhriPatrol();
+						ahri_pat.start();
+					}
+					if (NidaleeButton.isSelected() && PatrolButton.isSelected())
+					{
+						action_nidalee = new PatrolAction(x1, y1, x2, y2);
+						nidalee_patrol_check = 1;
+						nidalee_pat = new NidaleePatrol();
+						nidalee_pat.start();
+					}
+					removeMouseListener(Patroler);
+					Group2.clearSelection();
 				}
 			}
 		}
@@ -442,6 +469,7 @@ public class MainPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
+				clickcount = 0;
 				PatrolActions();
 				// MoveActions();
 			}
@@ -468,11 +496,42 @@ public class MainPanel extends JPanel
 					public void actionPerformed(ActionEvent arg0)
 					{
 						if (PoroButton.isSelected() && StopButton.isSelected())
+						{
 							poro_patrol_check = 0;
-						if (RengarButton.isSelected() && StopButton.isSelected())
+							poro_pat.stop();
+							poro_pat.interrupt();
+						}
+						if (RengarButton.isSelected()
+								&& StopButton.isSelected())
+						{
 							rengar_patrol_check = 0;
+							rengar_pat.stop();
+							rengar_pat.interrupt();
+						}
+						if (EliseButton.isSelected()
+								&& StopButton.isSelected())
+						{
+							elise_patrol_check = 0;
+							elise_pat.stop();
+							elise_pat.interrupt();
+						}
+						if (AhriButton.isSelected()
+								&& StopButton.isSelected())
+						{
+							ahri_patrol_check = 0;
+							ahri_pat.stop();
+							ahri_pat.interrupt();
+						}
+						if (NidaleeButton.isSelected()
+								&& StopButton.isSelected())
+						{
+							nidalee_patrol_check = 0;
+							nidalee_pat.stop();
+							nidalee_pat.interrupt();
+						}
+
 						System.out.println("STOP");
-						
+
 						x1 = 0;
 						y1 = 0;
 						x2 = 0;
@@ -481,14 +540,15 @@ public class MainPanel extends JPanel
 						mousepress = 0;
 						HowManyCome = 0; // HowManyCome 변수는 패트롤을 몇번 시행했는지
 											// 알려준다.(그냥 패트롤중엔 드래그불가변수)
-						/*poro_patrol_check = 0;
-						rengar_patrol_check = 0;
-						elise_patrol_check = 0;
-						ahri_patrol_check = 0;
-						nidalee_patrol_check = 0; */// 이 변수는 Patrol버튼이 딱 1번만
-													// 작동시키도록 하기위한 변수다.
+						/*
+						 * poro_patrol_check = 0; rengar_patrol_check = 0;
+						 * elise_patrol_check = 0; ahri_patrol_check = 0;
+						 * nidalee_patrol_check = 0;
+						 */// 이 변수는 Patrol버튼이 딱 1번만
+							// 작동시키도록 하기위한 변수다.
 						PatrolActions(); // 한번더 호출해줘서 지우도록함
 						MoveActions(); // Stop시 한번더 호출해서 초기상태로 되돌린다.
+						Group2.clearSelection();
 					}
 
 				});
@@ -558,26 +618,16 @@ public class MainPanel extends JPanel
 		if (PoroButton.isSelected() && PatrolButton.isSelected()
 				&& poro_patrol_check == 0)
 		{
-			System.out.println("P_B : " + PoroButton.isSelected());
-			System.out.println("Patrol_Button : " + PatrolButton.isSelected());
-			System.out.println("Patrol");
 			addMouseListener(Patroler); // 자주쓰니까 InnerClass로 바꿔서 코드를 이쁘게함
 			// 딱 한번만 작동할수 있도록 함. 계속누르면 에러가나므로
-		} else if (MoveButton.isSelected() || StopButton.isSelected()) // 재실행을
-																		// 하였을 때
-																		// 패트롤이
-																		// 아니라면
-																		// Patroler
-																		// 마우스리스너를
-																		// 삭제한다.
+		} else if (MoveButton.isSelected() || StopButton.isSelected()) 
 		{ // 마우스리스너가 삭제됨에 따라 드래그는 불가능해진다.
 			removeMouseListener(Patroler);
 			poro_patrol_check = 0;
-			System.out.println("FALSE Patroler ACT");
+			
 		} else
 		// 패트롤버튼을 계속눌렀을경우, 아무일도 일어나지 않게한다.
 		{
-			System.out.println("Nothing Happen");
 			if (PoroButton.isSelected() && PatrolButton.isSelected())
 				poro_patrol_check = 1;
 		}
@@ -585,84 +635,74 @@ public class MainPanel extends JPanel
 		if (RengarButton.isSelected() && PatrolButton.isSelected()
 				&& rengar_patrol_check == 0)
 		{
-			System.out.println("P_B : " + RengarButton.isSelected());
-			System.out.println("Patrol_Button : " + PatrolButton.isSelected());
-			System.out.println("Patrol");
 			addMouseListener(Patroler); // 자주쓰니까 InnerClass로 바꿔서 코드를 이쁘게함
 			// 딱 한번만 작동할수 있도록 함. 계속누르면 에러가나므로
-		} else if (MoveButton.isSelected() || StopButton.isSelected()) // 재실행을
-																		// 하였을 때
-																		// 패트롤이
-																		// 아니라면
-																		// Patroler
-																		// 마우스리스너를
-																		// 삭제한다.
+		} else if (MoveButton.isSelected() || StopButton.isSelected()) 
 		{ // 마우스리스너가 삭제됨에 따라 드래그는 불가능해진다.
 			removeMouseListener(Patroler);
 			rengar_patrol_check = 0;
-			System.out.println("FALSE Patroler ACT");
+			
 		} else
 		// 패트롤버튼을 계속눌렀을경우, 아무일도 일어나지 않게한다.
 		{
-			System.out.println("Nothing Happen");
 			if (RengarButton.isSelected() && PatrolButton.isSelected())
 				rengar_patrol_check = 1;
 		}
-	}
-
-	public void Timers() // 패트롤을 해주는 타이머
-	{
-		tm1 = new Timer(100, new ActionListener()
+		
+		if (EliseButton.isSelected() && PatrolButton.isSelected()
+				&& elise_patrol_check == 0)
 		{
-
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				if (PoroButton.isSelected() && PatrolButton.isSelected()
-						|| poro_patrol_check == 1)
-				{
-					System.out.println(poro_patrol_check);
-					action_poro.PatrolActions();
-					poro.x1 = action_poro.getX1();
-					poro.y1 = action_poro.getY1();
-				}
-				if (RengarButton.isSelected() && PatrolButton.isSelected()
-						|| rengar_patrol_check == 1)
-				{
-					action_rengar.PatrolActions();
-					rg.x1 = action_rengar.getX1();
-					rg.y1 = action_rengar.getY1();
-				}
-				if (EliseButton.isSelected() && PatrolButton.isSelected())
-				{
-					action_elise.PatrolActions();
-					elise.x1 = action_elise.getX1();
-					elise.y1 = action_elise.getY1();
-				}
-				if (AhriButton.isSelected() && PatrolButton.isSelected())
-				{
-					action_ahri.PatrolActions();
-					ahri.x1 = action_ahri.getX1();
-					ahri.y1 = action_ahri.getY1();
-				}
-				if (NidaleeButton.isSelected() && PatrolButton.isSelected())
-				{
-					action_nidalee.PatrolActions();
-					nidalee.x1 = action_nidalee.getX1();
-					nidalee.y1 = action_nidalee.getY1();
-				}
-
-				repaint();
-			}
-
-		});
-
-		tm1.stop();
-		tm1.setDelay(100);
-		tm1.start();
+			addMouseListener(Patroler); // 자주쓰니까 InnerClass로 바꿔서 코드를 이쁘게함
+			// 딱 한번만 작동할수 있도록 함. 계속누르면 에러가나므로
+		} else if (MoveButton.isSelected() || StopButton.isSelected()) 
+		{ // 마우스리스너가 삭제됨에 따라 드래그는 불가능해진다.
+			removeMouseListener(Patroler);
+			elise_patrol_check = 0;
+			
+		} else
+		// 패트롤버튼을 계속눌렀을경우, 아무일도 일어나지 않게한다.
+		{
+			if (EliseButton.isSelected() && PatrolButton.isSelected())
+				elise_patrol_check = 1;
+		}
+		
+		if (AhriButton.isSelected() && PatrolButton.isSelected()
+				&& ahri_patrol_check == 0)
+		{
+			addMouseListener(Patroler); // 자주쓰니까 InnerClass로 바꿔서 코드를 이쁘게함
+			// 딱 한번만 작동할수 있도록 함. 계속누르면 에러가나므로
+		} else if (MoveButton.isSelected() || StopButton.isSelected()) 
+		{ // 마우스리스너가 삭제됨에 따라 드래그는 불가능해진다.
+			removeMouseListener(Patroler);
+			ahri_patrol_check = 0;
+			
+		} else
+		// 패트롤버튼을 계속눌렀을경우, 아무일도 일어나지 않게한다.
+		{
+			if (AhriButton.isSelected() && PatrolButton.isSelected())
+				ahri_patrol_check = 1;
+		}
+		
+		if (NidaleeButton.isSelected() && PatrolButton.isSelected()
+				&& nidalee_patrol_check == 0)
+		{
+			addMouseListener(Patroler); // 자주쓰니까 InnerClass로 바꿔서 코드를 이쁘게함
+			// 딱 한번만 작동할수 있도록 함. 계속누르면 에러가나므로
+		} else if (MoveButton.isSelected() || StopButton.isSelected()) 
+		{ // 마우스리스너가 삭제됨에 따라 드래그는 불가능해진다.
+			removeMouseListener(Patroler);
+			nidalee_patrol_check = 0;
+			
+		} else
+		// 패트롤버튼을 계속눌렀을경우, 아무일도 일어나지 않게한다.
+		{
+			if (NidaleeButton.isSelected() && PatrolButton.isSelected())
+				nidalee_patrol_check = 1;
+		}
+		
 	}
 
-	public void Icons() // 간지나는 아이콘들
+		public void Icons() // 간지나는 아이콘들
 	{
 		// ///////////////////////포로//////////////////////////////
 		if (PoroButton.isSelected() == false && check_poro == 0)
@@ -749,6 +789,152 @@ public class MainPanel extends JPanel
 			abyss.setIcon(new ImageIcon(bti.abyss_selected));
 		} else
 			abyss.setIcon(new ImageIcon(bti.abyss_icon));
+	}
+
+	class PoroPatrol extends Thread
+	{
+		private volatile boolean isRunning = true;
+
+		public void run()
+		{
+			if (PoroButton.isSelected() && PatrolButton.isSelected()
+					|| poro_patrol_check == 1)
+			{
+				while (true)
+				{
+					System.out.println(poro_patrol_check);
+					action_poro.PatrolActions();
+					poro.x1 = action_poro.getX1();
+					poro.y1 = action_poro.getY1();
+					try
+					{
+						sleep(100);
+						repaint();
+					} catch (InterruptedException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		public void kill()
+		{
+			isRunning = false;
+		}
+	}
+
+	class RengarPatrol extends Thread
+	{
+		public void run()
+		{
+
+			if (RengarButton.isSelected() && PatrolButton.isSelected()
+					|| rengar_patrol_check == 1)
+			{
+				while (true)
+				{
+					action_rengar.PatrolActions();
+					rg.x1 = action_rengar.getX1();
+					rg.y1 = action_rengar.getY1();
+
+					try
+					{
+						sleep(100);
+						repaint();
+					} catch (InterruptedException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	class ElisePatrol extends Thread
+	{
+		public void run()
+		{
+
+			if (EliseButton.isSelected() && PatrolButton.isSelected()
+					|| rengar_patrol_check == 1)
+			{
+				while (true)
+				{
+					action_elise.PatrolActions();
+					elise.x1 = action_elise.getX1();
+					elise.y1 = action_elise.getY1();
+
+					try
+					{
+						sleep(100);
+						repaint();
+					} catch (InterruptedException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	class AhriPatrol extends Thread
+	{
+		public void run()
+		{
+
+			if (AhriButton.isSelected() && PatrolButton.isSelected()
+					|| rengar_patrol_check == 1)
+			{
+				while (true)
+				{
+					action_ahri.PatrolActions();
+					ahri.x1 = action_ahri.getX1();
+					ahri.y1 = action_ahri.getY1();
+
+					try
+					{
+						sleep(100);
+						repaint();
+					} catch (InterruptedException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	class NidaleePatrol extends Thread
+	{
+		public void run()
+		{
+
+			if (NidaleeButton.isSelected() && PatrolButton.isSelected()
+					|| rengar_patrol_check == 1)
+			{
+				while (true)
+				{
+					action_nidalee.PatrolActions();
+					nidalee.x1 = action_nidalee.getX1();
+					nidalee.y1 = action_nidalee.getY1();
+
+					try
+					{
+						sleep(100);
+						repaint();
+					} catch (InterruptedException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 }
