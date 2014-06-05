@@ -44,6 +44,7 @@ public class MouseAction extends JPanel implements MouseInputListener
 				@Override
 				public void actionPerformed(ActionEvent e)
 				{
+					System.out.println("Check13");
 					action_poro.PatrolActions();
 					repaint();
 					
