@@ -20,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.applet.*;
 
@@ -36,6 +37,9 @@ public class MainPanel extends JPanel
 	Cursor Cursor;
 	File rift_bg = new File(".\\Resource\\Background.png");
 	File abyss_bg = new File(".\\Resource\\Background2.png");
+	File snow = new File(".\\Resource\\snow_ani.gif");
+	ImageIcon imageicon = new ImageIcon();
+	Image snowani = Toolkit.getDefaultToolkit().createImage(".\\Resource\\snow_ani.gif");
 	Buttons button1 = new Buttons();
 	JRadioButton PoroButton = new JRadioButton();
 	JRadioButton RengarButton = new JRadioButton();
@@ -80,6 +84,7 @@ public class MainPanel extends JPanel
 	AbyssThread abyss_animate;
 	AbyssBackground abyss_resource = new AbyssBackground();
 	int abyss_ani_check = 0;
+	int snow_ani_check = 0;
 
 	Renga rg = new Renga();
 	Poro poro = new Poro();
@@ -227,6 +232,7 @@ public class MainPanel extends JPanel
 		button_action();
 		rifts = ImageIO.read(rift_bg);
 		abysss = ImageIO.read(abyss_bg);
+		
 
 		add(button1, BorderLayout.NORTH);
 		JPanel p1 = new JPanel();
@@ -328,14 +334,12 @@ public class MainPanel extends JPanel
 		@Override
 		public void mouseEntered(MouseEvent arg0)
 		{
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0)
 		{
-			// TODO Auto-generated method stub
 
 		}
 
@@ -367,7 +371,6 @@ public class MainPanel extends JPanel
 		@Override
 		public void mouseReleased(MouseEvent arg0)
 		{
-			// TODO Auto-generated method stub
 
 		}
 
@@ -427,6 +430,15 @@ public class MainPanel extends JPanel
 		{
 			nidalee.draw(g2);
 		}
+		if(check_bg == 0)
+		{
+			g.drawImage(snowani, 0, 0, this);
+			g.drawImage(snowani, 250, 0, this);
+			g.drawImage(snowani, 500, 0, this);
+			g.drawImage(snowani, 0, 250, this);
+			g.drawImage(snowani, 250, 250, this);
+			g.drawImage(snowani, 500, 250, this);
+		}
 	}
 
 	public void myCursor() throws IOException
@@ -456,7 +468,6 @@ public class MainPanel extends JPanel
 					Group2.clearSelection();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -471,7 +482,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 
@@ -492,7 +502,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e2)
 				{
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				try
@@ -522,7 +531,6 @@ public class MainPanel extends JPanel
 					}
 				} catch (IOException e1)
 				{
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -541,7 +549,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e2)
 				{
-					// TODO Auto-generated catch block
 					e2.printStackTrace();
 				}
 				MenuUI menu;
@@ -576,7 +583,6 @@ public class MainPanel extends JPanel
 					}
 				} catch (IOException e1)
 				{
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -595,7 +601,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("poro");
@@ -616,7 +621,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("rengar");
@@ -637,7 +641,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("elise");
@@ -658,7 +661,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("ahri");
@@ -679,7 +681,6 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				System.out.println("nidalee");
@@ -1438,6 +1439,8 @@ public class MainPanel extends JPanel
 			}
 		}
 	}
+	
+	
 
 	public void input()
 	{
