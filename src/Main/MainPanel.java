@@ -9,22 +9,17 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.geom.Line2D;
-import java.awt.geom.Rectangle2D;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 import java.applet.*;
 
@@ -34,6 +29,7 @@ import javax.swing.border.Border;
 
 import Animations.*;
 
+@SuppressWarnings("serial")
 public class MainPanel extends JPanel
 {
 	Image rifts, abysss;
@@ -220,8 +216,6 @@ public class MainPanel extends JPanel
 			@Override
 			public void mouseMoved(MouseEvent e)
 			{
-				final int x = e.getX();
-				final int y = e.getY();
 				Icons();
 				setCursor(Cursor);
 
@@ -469,7 +463,7 @@ public class MainPanel extends JPanel
 				Object[] Field1 =
 				{ button1.character1, button1.character2, button1.character3,
 						button1.character4, button1.character5 };
-				int value = JOptionPane.showOptionDialog(null,
+				JOptionPane.showOptionDialog(null,
 						"Select Character", "Select Character",
 						JOptionPane.DEFAULT_OPTION, 0, null, Field1, Field1[i]);
 				try
@@ -740,6 +734,7 @@ public class MainPanel extends JPanel
 															// 해줌으로써 멈추는것을 유도한다.
 				{
 
+					@SuppressWarnings("deprecation")
 					@Override
 					public void actionPerformed(ActionEvent arg0)
 					{
@@ -810,6 +805,7 @@ public class MainPanel extends JPanel
 		DeleteButton.addActionListener(new ActionListener() // ������ư
 				{
 
+					@SuppressWarnings("deprecation")
 					@Override
 					public void actionPerformed(ActionEvent arg0)
 					{
@@ -1246,8 +1242,6 @@ public class MainPanel extends JPanel
 
 	class PoroPatrol extends Thread
 	{
-		private volatile boolean isRunning = true;
-
 		public void run()
 		{
 			if (PoroButton.isSelected() && PatrolButton.isSelected()
@@ -1272,10 +1266,6 @@ public class MainPanel extends JPanel
 			}
 		}
 
-		public void kill()
-		{
-			isRunning = false;
-		}
 	}
 
 	class RengarPatrol extends Thread
@@ -1393,6 +1383,7 @@ public class MainPanel extends JPanel
 	class RiftThread extends Thread
 	{
 
+		@SuppressWarnings("deprecation")
 		public void run()
 		{
 			for (int i = 600; i >= 0; i -= 50)
@@ -1422,6 +1413,7 @@ public class MainPanel extends JPanel
 	class AbyssThread extends Thread
 	{
 
+		@SuppressWarnings("deprecation")
 		public void run()
 		{
 			for (int i = 0; i <= 400; i += 50)

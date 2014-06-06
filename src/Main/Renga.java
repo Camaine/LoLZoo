@@ -6,6 +6,7 @@ import java.awt.geom.Line2D;
 import javax.swing.*;
 
 
+@SuppressWarnings("serial")
 public class Renga extends JPanel
 {
 	Color gray = new Color(200,200,200);
@@ -115,12 +116,12 @@ public class Renga extends JPanel
 		g2.draw(scar);
 		
 		Ellipse2D.Double redeye = new Ellipse2D.Double(x1+68,y1+50,10,10);
-		g2.setColor(col.RED);
+		g2.setColor(Color.RED);
 		g2.fill(redeye);
 		g2.draw(redeye);
 		
 		Ellipse2D.Double yelloweye = new Ellipse2D.Double(x1+70,y1+52,6,6);
-		g2.setColor(col.YELLOW);
+		g2.setColor(Color.YELLOW);
 		g2.fill(yelloweye);
 		g2.draw(yelloweye);
 		

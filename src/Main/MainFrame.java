@@ -4,17 +4,18 @@ import java.io.IOException;
 import javax.swing.JFrame;
 
 
-public class MainFrame extends JFrame
+public class MainFrame 
 {
-	public MainFrame() throws IOException
+	public static void main(String[] args) throws IOException
 	{
-		setSize(800,600);
-		setTitle("LoL Zoo");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MenuUI menu = new MenuUI();
+		JFrame jf =new JFrame();
+		jf.setSize(800,600);
+		jf.setTitle("LoL Zoo");
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainPanel img = new MainPanel();
 		//setJMenuBar(menu.menubar);
-		add(img);
-		setVisible(true);
+		jf.add(img);
+		jf.setVisible(true);
 	}
+	
 }

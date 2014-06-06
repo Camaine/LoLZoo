@@ -1,12 +1,11 @@
 package Main;
 import javax.swing.*;
-import javax.swing.event.*;
-
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 
 
+@SuppressWarnings("serial")
 public class Poro extends JPanel implements DrawAnimal
 {
 	int size = 0;
@@ -42,12 +41,6 @@ public class Poro extends JPanel implements DrawAnimal
 		repaint();
 	}
 	
-	public void paintComponent(Graphics g)
-	{
-		Graphics2D g2 = (Graphics2D) g;
-				
-	}
-
 	@Override
 	public void draw(Graphics2D g2)
 	{

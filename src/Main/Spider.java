@@ -8,6 +8,7 @@ import java.awt.geom.Line2D;
 
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Spider extends JPanel
 {
 	int x1, y1;

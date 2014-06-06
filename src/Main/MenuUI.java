@@ -9,6 +9,7 @@ import java.util.*;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class MenuUI extends JFrame
 {
 	JMenuBar menubar = new JMenuBar();
