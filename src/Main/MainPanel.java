@@ -172,7 +172,7 @@ public class MainPanel extends JPanel
 				{
 				case 101:
 				{
-					if (HowManyCome == 0)
+					if (poro_patrol_check == 0 && HowManyCome == 0)
 					{
 						poro.x1 = x1 - 60;
 						poro.y1 = y1 - 40;
@@ -181,7 +181,7 @@ public class MainPanel extends JPanel
 				}
 				case 102:
 				{
-					if (HowManyCome == 0)
+					if (rengar_patrol_check == 0 &&HowManyCome == 0)
 					{
 						rg.x1 = x1;
 						rg.y1 = y1;
@@ -190,7 +190,7 @@ public class MainPanel extends JPanel
 				}
 				case 103:
 				{
-					if (HowManyCome == 0 && ChampionMove == 103)
+					if (elise_patrol_check == 0 &&HowManyCome == 0 && ChampionMove == 103)
 					{
 						elise.x1 = x1 - 70;
 						elise.y1 = y1 - 70;
@@ -198,7 +198,7 @@ public class MainPanel extends JPanel
 				}
 				case 104:
 				{
-					if (HowManyCome == 0 && ChampionMove == 104)
+					if (ahri_patrol_check == 0 &&HowManyCome == 0 && ChampionMove == 104)
 					{
 						ahri.x1 = x1 - 70;
 						ahri.y1 = y1 - 70;
@@ -206,7 +206,7 @@ public class MainPanel extends JPanel
 				}
 				case 105:
 				{
-					if (HowManyCome == 0 && ChampionMove == 105)
+					if (nidalee_patrol_check == 0 &&HowManyCome == 0 && ChampionMove == 105)
 					{
 						nidalee.x1 = x1 - 70;
 						nidalee.y1 = y1 - 70;
