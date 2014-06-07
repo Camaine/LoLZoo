@@ -46,7 +46,7 @@ public class MainPanel extends JPanel
 	JRadioButton AhriButton = new JRadioButton();
 	JRadioButton NidaleeButton = new JRadioButton();
 	JRadioButton EliseButton = new JRadioButton();
-	JRadioButton ShivanaButton = new JRadioButton();
+	JRadioButton NasusButton = new JRadioButton();
 	JRadioButton PatrolButton = new JRadioButton();
 	JRadioButton MoveButton = new JRadioButton();
 	JRadioButton StopButton = new JRadioButton();
@@ -69,12 +69,14 @@ public class MainPanel extends JPanel
 	PatrolAction action_elise = new PatrolAction();
 	PatrolAction action_ahri = new PatrolAction();
 	PatrolAction action_nidalee = new PatrolAction();
+	PatrolAction action_nasus = new PatrolAction();
 
 	PoroPatrol poro_pat;
 	RengarPatrol rengar_pat;
 	ElisePatrol elise_pat;
 	AhriPatrol ahri_pat;
 	NidaleePatrol nidalee_pat;
+	NasusPatrol nasus_pat;
 
 	File blank_file = new File(".\\Resource\\blank.png");
 	Image blank = ImageIO.read(blank_file);
@@ -92,6 +94,7 @@ public class MainPanel extends JPanel
 	Spider elise = new Spider();
 	Ahri ahri = new Ahri();
 	Nidalee nidalee = new Nidalee();
+	Dog nasus = new Dog();
 
 	MouseListen Patroler = new MouseListen();
 
@@ -100,6 +103,7 @@ public class MainPanel extends JPanel
 	public int check_elise = 0;
 	public int check_ahri = 0;
 	public int check_nidalee = 0;
+	public int check_nasus = 0;
 	public int check_bg = 1;
 	public int x1, y1, x2, y2;
 	public int ChampionMove, mousepress = 0, clickcount = 0;
@@ -113,6 +117,7 @@ public class MainPanel extends JPanel
 	int elise_patrol_check = 0;
 	int ahri_patrol_check = 0;
 	int nidalee_patrol_check = 0;
+	int nasus_patrol_check = 0;
 
 	int bgm = 1;
 	File file = new File(".\\Resource\\button_click.wav");
@@ -134,7 +139,7 @@ public class MainPanel extends JPanel
 		Group1.add(AhriButton);
 		Group1.add(NidaleeButton);
 		Group1.add(EliseButton);
-		Group1.add(ShivanaButton);
+		Group1.add(NasusButton);
 		Group2.add(PatrolButton);
 		Group2.add(MoveButton);
 		Group2.add(StopButton);
@@ -146,7 +151,7 @@ public class MainPanel extends JPanel
 		AhriButton.setBackground(new Color(60, 60, 60));
 		EliseButton.setBackground(new Color(60, 60, 60));
 		NidaleeButton.setBackground(new Color(60, 60, 60));
-		ShivanaButton.setBackground(new Color(60, 60, 60));
+		NasusButton.setBackground(new Color(60, 60, 60));
 		MoveButton.setBackground(new Color(60, 60, 60));
 		PatrolButton.setBackground(new Color(60, 60, 60));
 		StopButton.setBackground(new Color(60, 60, 60));
@@ -211,6 +216,15 @@ public class MainPanel extends JPanel
 						nidalee.y1 = y1 - 70;
 					}
 				}
+				case 106:
+				{
+					if (nasus_patrol_check == 0 && HowManyCome == 0
+							&& ChampionMove == 106)
+					{
+						nasus.x1 = x1 - 70;
+						nasus.y1 = y1 - 70;
+					}
+				}
 				}
 
 				repaint();
@@ -248,7 +262,7 @@ public class MainPanel extends JPanel
 		p2.add(NidaleeButton);
 		p2.add(AhriButton);
 		p2.add(EliseButton);
-		p2.add(ShivanaButton);
+		p2.add(NasusButton);
 		p2.setBackground(new Color(60, 60, 60));
 		JPanel p3 = new JPanel();
 		p3.setLayout(new GridLayout(2, 1));
@@ -323,6 +337,13 @@ public class MainPanel extends JPanel
 						nidalee_pat = new NidaleePatrol();
 						nidalee_pat.start();
 					}
+					if (NasusButton.isSelected() && PatrolButton.isSelected())
+					{
+						action_nasus = new PatrolAction(x1, y1, x2, y2);
+						nasus_patrol_check = 1;
+						nasus_pat = new NasusPatrol();
+						nasus_pat.start();
+					}
 					removeMouseListener(Patroler);
 					Group2.clearSelection();
 				}
@@ -379,9 +400,9 @@ public class MainPanel extends JPanel
 		Graphics2D g2 = (Graphics2D) g;
 		if (Only_One == 0)
 		{
-			
+
 			g.drawImage(blank, 0, 0, null);
-			
+
 			la.ani_draw(g);
 		}
 		if (check_bg == 1)
@@ -389,14 +410,14 @@ public class MainPanel extends JPanel
 			if (Only_One == 1)
 			{
 				g.drawImage(abysss, 0, 0, null);
-			
-			if (rift_ani_check == 1)
-			{
-				rift_animate = new RiftThread();
-				rift_animate.start();
-				rift_ani_check = 0;
-			}
-			rift_resource.draw(g);
+
+				if (rift_ani_check == 1)
+				{
+					rift_animate = new RiftThread();
+					rift_animate.start();
+					rift_ani_check = 0;
+				}
+				rift_resource.draw(g);
 			}
 
 		} else
@@ -431,6 +452,10 @@ public class MainPanel extends JPanel
 		if (check_nidalee == 1)
 		{
 			nidalee.draw(g2);
+		}
+		if (check_nasus == 1)
+		{
+			nasus.draw(g2);
 		}
 		if (check_bg == 0)
 		{
@@ -475,7 +500,8 @@ public class MainPanel extends JPanel
 
 				Object[] Field1 =
 				{ button1.character1, button1.character2, button1.character3,
-						button1.character4, button1.character5 };
+						button1.character4, button1.character5,
+						button1.character6, };
 				JOptionPane.showOptionDialog(null, "Select Character",
 						"Select Character", JOptionPane.DEFAULT_OPTION, 0,
 						null, Field1, Field1[i]);
@@ -693,6 +719,26 @@ public class MainPanel extends JPanel
 
 		});
 
+		button1.character6.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+			{
+				try
+				{
+					BtnSound();
+				} catch (MalformedURLException e)
+				{
+					e.printStackTrace();
+				}
+				System.out.println("nidalee");
+				check_nasus = 1;
+				repaint();
+			}
+
+		});
+
 		PatrolButton.addActionListener(new ActionListener()
 		{
 
@@ -750,37 +796,49 @@ public class MainPanel extends JPanel
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-						if (PoroButton.isSelected() && StopButton.isSelected())
+						if (PoroButton.isSelected() && StopButton.isSelected()
+								&& poro_patrol_check == 1)
 						{
 							poro_patrol_check = 0;
 							poro_pat.stop();
 							poro_pat.interrupt();
 						}
 						if (RengarButton.isSelected()
-								&& StopButton.isSelected())
+								&& StopButton.isSelected()
+								&& rengar_patrol_check == 1)
 						{
 							rengar_patrol_check = 0;
 							rengar_pat.stop();
 							rengar_pat.interrupt();
 						}
-						if (EliseButton.isSelected() && StopButton.isSelected())
+						if (EliseButton.isSelected() && StopButton.isSelected()
+								&& elise_patrol_check == 1)
 						{
 							elise_patrol_check = 0;
 							elise_pat.stop();
 							elise_pat.interrupt();
 						}
-						if (AhriButton.isSelected() && StopButton.isSelected())
+						if (AhriButton.isSelected() && StopButton.isSelected()
+								&& ahri_patrol_check == 1)
 						{
 							ahri_patrol_check = 0;
 							ahri_pat.stop();
 							ahri_pat.interrupt();
 						}
 						if (NidaleeButton.isSelected()
-								&& StopButton.isSelected())
+								&& StopButton.isSelected()
+								&& nidalee_patrol_check == 1)
 						{
 							nidalee_patrol_check = 0;
 							nidalee_pat.stop();
 							nidalee_pat.interrupt();
+						}
+						if (NasusButton.isSelected() && StopButton.isSelected()
+								&& nidalee_patrol_check == 1)
+						{
+							nasus_patrol_check = 0;
+							nasus_pat.stop();
+							nasus_pat.interrupt();
 						}
 
 						System.out.println("STOP");
@@ -872,6 +930,16 @@ public class MainPanel extends JPanel
 							{
 								nidalee_pat.stop();
 								nidalee_pat.interrupt();
+							}
+						}
+						if (NasusButton.isSelected() && check_nidalee == 1)
+						{
+
+							check_nasus = 0;
+							if (nasus_patrol_check == 1)
+							{
+								nasus_pat.stop();
+								nasus_pat.interrupt();
 							}
 						}
 						ChampionMove = 0;
@@ -1027,6 +1095,24 @@ public class MainPanel extends JPanel
 				}
 			}
 		});
+		NasusButton.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				Group2.clearSelection();
+				ChampionMove = 0;
+				try
+				{
+					BtnSound();
+				} catch (MalformedURLException e2)
+				{
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+			}
+		});
 	}
 
 	public void MoveActions() // 이 메소드는 스위치를 작동시키는 메소드다 //드래그(MOVE) 버튼
@@ -1057,6 +1143,10 @@ public class MainPanel extends JPanel
 		if (NidaleeButton.isSelected() && MoveButton.isSelected())
 		{
 			ChampionMove = 105;
+		}
+		if (NasusButton.isSelected() && MoveButton.isSelected())
+		{
+			ChampionMove = 106;
 		}
 		if (!MoveButton.isSelected()) // 재호출을 했을때 Move가 선택되지 않았다면 초기상태로 되돌린다.
 		{ // 초기화 작업
@@ -1150,6 +1240,22 @@ public class MainPanel extends JPanel
 			if (NidaleeButton.isSelected() && PatrolButton.isSelected())
 				nidalee_patrol_check = 1;
 		}
+		if (NasusButton.isSelected() && PatrolButton.isSelected()
+				&& nasus_patrol_check == 0)
+		{
+			addMouseListener(Patroler); // 자주쓰니까 InnerClass로 바꿔서 코드를 이쁘게함
+			// 딱 한번만 작동할수 있도록 함. 계속누르면 에러가나므로
+		} else if (MoveButton.isSelected() || StopButton.isSelected())
+		{ // 마우스리스너가 삭제됨에 따라 드래그는 불가능해진다.
+			removeMouseListener(Patroler);
+			nasus_patrol_check = 0;
+
+		} else
+		// 패트롤버튼을 계속눌렀을경우, 아무일도 일어나지 않게한다.
+		{
+			if (NasusButton.isSelected() && PatrolButton.isSelected())
+				nasus_patrol_check = 1;
+		}
 		ChampionMove = 0;
 
 	}
@@ -1210,6 +1316,17 @@ public class MainPanel extends JPanel
 		} else if (NidaleeButton.isSelected() && check_nidalee == 1)
 		{
 			NidaleeButton.setIcon(new ImageIcon(bti.nidalee_selected));
+		}
+		// //////////////////////나서스//////////////////////////////
+		if (NasusButton.isSelected() == false && check_nasus == 0)
+		{
+			NasusButton.setIcon(new ImageIcon(bti.nasus_disable));
+		} else if (NasusButton.isSelected() == false && check_nasus == 1)
+		{
+			NasusButton.setIcon(new ImageIcon(bti.nasus_active));
+		} else if (NasusButton.isSelected() && check_nasus == 1)
+		{
+			NasusButton.setIcon(new ImageIcon(bti.nasus_selected));
 		}
 		// ///////////////////////Patrol////////////////////////////
 		if (PatrolButton.isSelected())
@@ -1389,6 +1506,34 @@ public class MainPanel extends JPanel
 		}
 	}
 
+	class NasusPatrol extends Thread
+	{
+		public void run()
+		{
+
+			if (NasusButton.isSelected() && PatrolButton.isSelected()
+					|| nasus_patrol_check == 1)
+			{
+				while (true)
+				{
+					action_nasus.PatrolActions();
+					nasus.x1 = action_nasus.getX1();
+					nasus.y1 = action_nasus.getY1();
+
+					try
+					{
+						sleep(100);
+						repaint();
+					} catch (InterruptedException e)
+					{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+
 	class RiftThread extends Thread
 	{
 
@@ -1492,6 +1637,12 @@ public class MainPanel extends JPanel
 		data.add(action_nidalee.y1);
 		data.add(bgm);
 		data.add(Only_One);
+		data.add(check_nasus);
+		data.add(nasus_patrol_check);
+		data.add(nasus.x1);
+		data.add(nasus.y1);
+		data.add(action_nasus.x1);
+		data.add(action_nasus.y1);
 		System.out.println(ahri.x1);
 	}
 
@@ -1579,6 +1730,34 @@ public class MainPanel extends JPanel
 		bgm = data.get(count);
 		count++;
 		Only_One = data.get(count);
+		count++;
+		check_nasus = data.get(count);
+		count++;
+		nasus_patrol_check = data.get(count);
+		count++;
+		nasus.x1 = data.get(count);
+		count++;
+		nasus.y1 = data.get(count);
+		count++;
+		action_nasus.x1 = data.get(count);
+		count++;
+		action_nasus.y1 = data.get(count);
+		count++;
+		poro_patrol_check = 0;
+		rengar_patrol_check = 0;
+		elise_patrol_check = 0;
+		ahri_patrol_check = 0;
+		nidalee_patrol_check = 0;
+		nasus_patrol_check = 0;
+		x1 = 0;
+		y1 = 0;
+		x2 = 0;
+		y2 = 0;
+		clickcount = 0;
+		mousepress = 0;
+		PatrolActions(); // 한번더 호출해줘서 지우도록함
+		MoveActions(); // Stop시 한번더 호출해서 초기상태로 되돌린다.
+		Group2.clearSelection();
 		repaint();
 	}
 

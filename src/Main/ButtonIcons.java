@@ -24,6 +24,9 @@ public class ButtonIcons
 	public Image nidalee_active = ImageIO.read(new File(".\\Resource\\Nidalee_icon.png"));
 	public Image nidalee_disable = ImageIO.read(new File(".\\Resource\\Nidalee_disable.png"));
 	public Image nidalee_selected = ImageIO.read(new File(".\\Resource\\Nidalee_selected.png"));
+	public Image nasus_active = ImageIO.read(new File(".\\Resource\\Nasus_icon.png"));
+	public Image nasus_disable = ImageIO.read(new File(".\\Resource\\Nasus_disable.png"));
+	public Image nasus_selected = ImageIO.read(new File(".\\Resource\\Nasus_selected.png"));
 	public Image move_active = ImageIO.read(new File(".\\Resource\\move_active.png"));
 	public Image move_icon = ImageIO.read(new File(".\\Resource\\move_icon.png"));
 	public Image patrol_active = ImageIO.read(new File(".\\Resource\\patrol_active.png"));

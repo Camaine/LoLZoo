@@ -38,6 +38,7 @@ public class Buttons extends JPanel
 		select_elise();
 		select_ahri();
 		select_nidalee();
+		select_nasus();
 		add(character_select);
 		add(save_select, FlowLayout.LEFT);
 		add(load_select, FlowLayout.RIGHT);
@@ -142,6 +143,19 @@ public class Buttons extends JPanel
 			
 		}
 		character5.setPreferredSize(new Dimension(50, 50));
+	}
+	
+	public void select_nasus()
+	{
+		try
+		{
+			Image img = ImageIO.read(new File(".\\Resource\\Nasus_icon.png"));
+			character6.setIcon(new ImageIcon(img));
+		}catch(IOException ex)
+		{
+			
+		}
+		character6.setPreferredSize(new Dimension(50, 50));
 	}
 
 	

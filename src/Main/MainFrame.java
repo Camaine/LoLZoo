@@ -30,7 +30,6 @@ class LoginPanel extends JFrame
 	public LoginPanel()throws  MalformedURLException
 	{
 
-		int Login_check = 0;
 		play_bgm();
 		setSize(800, 600);
 		setTitle("LoL Zoo");
