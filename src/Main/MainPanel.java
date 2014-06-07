@@ -20,6 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 import java.applet.*;
 
@@ -41,6 +42,7 @@ public class MainPanel extends JPanel
 	Image snowani = Toolkit.getDefaultToolkit().createImage(
 			".\\Resource\\snow_ani.gif");
 	Buttons button1 = new Buttons();
+	Random rd = new Random();
 	JRadioButton PoroButton = new JRadioButton();
 	JRadioButton RengarButton = new JRadioButton();
 	JRadioButton AhriButton = new JRadioButton();
@@ -120,6 +122,7 @@ public class MainPanel extends JPanel
 	int nasus_patrol_check = 0;
 
 	int bgm = 1;
+	MoveSounds sounds = new MoveSounds();
 	File file = new File(".\\Resource\\button_click.wav");
 	AudioClip audio = Applet.newAudioClip(file.toURI().toURL());
 	File file2 = new File(".\\Resource\\Summoner_Rift_bgm.wav");
@@ -311,6 +314,8 @@ public class MainPanel extends JPanel
 					}
 					if (RengarButton.isSelected() && PatrolButton.isSelected())
 					{
+						int i = rd.nextInt(3);
+						sounds.rengar_move_sound.get(i).play();
 						action_rengar = new PatrolAction(x1, y1, x2, y2);
 						rengar_patrol_check = 1;
 						rengar_pat = new RengarPatrol();
@@ -318,6 +323,9 @@ public class MainPanel extends JPanel
 					}
 					if (EliseButton.isSelected() && PatrolButton.isSelected())
 					{
+						
+						int i = rd.nextInt(3);
+						sounds.elise_move_sound.get(i).play();
 						action_elise = new PatrolAction(x1, y1, x2, y2);
 						elise_patrol_check = 1;
 						elise_pat = new ElisePatrol();
@@ -325,6 +333,8 @@ public class MainPanel extends JPanel
 					}
 					if (AhriButton.isSelected() && PatrolButton.isSelected())
 					{
+						int i = rd.nextInt(3);
+						sounds.ahri_move_sound.get(i).play();
 						action_ahri = new PatrolAction(x1, y1, x2, y2);
 						ahri_patrol_check = 1;
 						ahri_pat = new AhriPatrol();
@@ -332,6 +342,9 @@ public class MainPanel extends JPanel
 					}
 					if (NidaleeButton.isSelected() && PatrolButton.isSelected())
 					{
+						
+						int i = rd.nextInt(3);
+						sounds.nidalee_move_sound.get(i).play();
 						action_nidalee = new PatrolAction(x1, y1, x2, y2);
 						nidalee_patrol_check = 1;
 						nidalee_pat = new NidaleePatrol();
@@ -339,6 +352,9 @@ public class MainPanel extends JPanel
 					}
 					if (NasusButton.isSelected() && PatrolButton.isSelected())
 					{
+						
+						int i = rd.nextInt(3);
+						sounds.nasus_move_sound.get(i).play();
 						action_nasus = new PatrolAction(x1, y1, x2, y2);
 						nasus_patrol_check = 1;
 						nasus_pat = new NasusPatrol();
@@ -819,7 +835,7 @@ public class MainPanel extends JPanel
 							elise_pat.interrupt();
 						}
 						if (AhriButton.isSelected() && StopButton.isSelected()
-								&& ahri_patrol_check == 1)
+								)
 						{
 							ahri_patrol_check = 0;
 							ahri_pat.stop();
@@ -1580,8 +1596,11 @@ public class MainPanel extends JPanel
 					if (abyss_resource.x1 == 400)
 					{
 						System.out.println("stop");
-						rift_animate.stop();
-						rift_animate.interrupt();
+						if (rift_ani_check == 1)
+						{
+							rift_animate.stop();
+							rift_animate.interrupt();
+						}
 					}
 					repaint();
 				} catch (InterruptedException e)
@@ -1755,9 +1774,16 @@ public class MainPanel extends JPanel
 		y2 = 0;
 		clickcount = 0;
 		mousepress = 0;
+		Only_One = 1;
 		PatrolActions(); // 한번더 호출해줘서 지우도록함
 		MoveActions(); // Stop시 한번더 호출해서 초기상태로 되돌린다.
 		Group2.clearSelection();
+		if(bgm == 1)
+		{
+			rift_ani_check = 1;
+		}
+		else
+			abyss_ani_check = 1;
 		repaint();
 	}
 

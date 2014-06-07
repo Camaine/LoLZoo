@@ -51,18 +51,13 @@ class LoginPanel extends JFrame
 						&& ls.password.getText().equals("1234"))
 				{
 					audio1.stop();
-					setVisible(false);
-					JFrame jf1 = new JFrame();
+					ls.setVisible(false);
 					MainPanel img;
-					jf1.setSize(800, 600);
-					jf1.setTitle("LoL Zoo");
-					jf1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					try
 					{
 						img = new MainPanel();
-						jf1.add(img);
-						jf1.setVisible(true);
-					
+						add(img);
+											
 					} catch (IOException e)
 					{
 						// TODO Auto-generated catch block
