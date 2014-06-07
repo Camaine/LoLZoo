@@ -20,7 +20,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
 import java.applet.*;
 
@@ -39,7 +38,8 @@ public class MainPanel extends JPanel
 	File abyss_bg = new File(".\\Resource\\Background2.png");
 	File snow = new File(".\\Resource\\snow_ani.gif");
 	ImageIcon imageicon = new ImageIcon();
-	Image snowani = Toolkit.getDefaultToolkit().createImage(".\\Resource\\snow_ani.gif");
+	Image snowani = Toolkit.getDefaultToolkit().createImage(
+			".\\Resource\\snow_ani.gif");
 	Buttons button1 = new Buttons();
 	JRadioButton PoroButton = new JRadioButton();
 	JRadioButton RengarButton = new JRadioButton();
@@ -83,6 +83,7 @@ public class MainPanel extends JPanel
 	int rift_ani_check = 1;
 	AbyssThread abyss_animate;
 	AbyssBackground abyss_resource = new AbyssBackground();
+	LoginAnimation la = new LoginAnimation();
 	int abyss_ani_check = 0;
 	int snow_ani_check = 0;
 
@@ -105,8 +106,6 @@ public class MainPanel extends JPanel
 
 	int HowManyCome = 0;
 
-	MouseAction action = new MouseAction();
-
 	int i;
 	int Only_One = 0;
 	int poro_patrol_check = 0;
@@ -124,11 +123,6 @@ public class MainPanel extends JPanel
 	AudioClip audio1 = Applet.newAudioClip(file1.toURI().toURL());
 
 	public ArrayList<Integer> data = new ArrayList<Integer>();
-
-	public MainPanel(int z) throws IOException
-	{
-
-	}
 
 	public MainPanel() throws IOException
 	{
@@ -159,7 +153,8 @@ public class MainPanel extends JPanel
 		DeleteButton.setBackground(new Color(60, 60, 60));
 		rift.setBackground(new Color(60, 60, 60));
 		abyss.setBackground(new Color(60, 60, 60));
-		name.setIcon(new ImageIcon(ImageIO.read(new File(".\\Resource\\name_label.png"))));
+		name.setIcon(new ImageIcon(ImageIO.read(new File(
+				".\\Resource\\name_label.png"))));
 		name.setBackground(new Color(60, 60, 60));
 		addMouseMotionListener(new MouseMotionListener()
 		{
@@ -182,16 +177,17 @@ public class MainPanel extends JPanel
 				}
 				case 102:
 				{
-					if (rengar_patrol_check == 0 &&HowManyCome == 0)
+					if (rengar_patrol_check == 0 && HowManyCome == 0)
 					{
-						rg.x1 = x1;
-						rg.y1 = y1;
+						rg.x1 = x1 - 50;
+						rg.y1 = y1 - 50;
 						break;
 					}
 				}
 				case 103:
 				{
-					if (elise_patrol_check == 0 &&HowManyCome == 0 && ChampionMove == 103)
+					if (elise_patrol_check == 0 && HowManyCome == 0
+							&& ChampionMove == 103)
 					{
 						elise.x1 = x1 - 70;
 						elise.y1 = y1 - 70;
@@ -199,7 +195,8 @@ public class MainPanel extends JPanel
 				}
 				case 104:
 				{
-					if (ahri_patrol_check == 0 &&HowManyCome == 0 && ChampionMove == 104)
+					if (ahri_patrol_check == 0 && HowManyCome == 0
+							&& ChampionMove == 104)
 					{
 						ahri.x1 = x1 - 70;
 						ahri.y1 = y1 - 70;
@@ -207,7 +204,8 @@ public class MainPanel extends JPanel
 				}
 				case 105:
 				{
-					if (nidalee_patrol_check == 0 &&HowManyCome == 0 && ChampionMove == 105)
+					if (nidalee_patrol_check == 0 && HowManyCome == 0
+							&& ChampionMove == 105)
 					{
 						nidalee.x1 = x1 - 70;
 						nidalee.y1 = y1 - 70;
@@ -232,7 +230,6 @@ public class MainPanel extends JPanel
 		button_action();
 		rifts = ImageIO.read(rift_bg);
 		abysss = ImageIO.read(abyss_bg);
-		
 
 		add(button1, BorderLayout.NORTH);
 		JPanel p1 = new JPanel();
@@ -260,7 +257,7 @@ public class MainPanel extends JPanel
 		p3.add(abyss);
 		p3.setBackground(new Color(60, 60, 60));
 		JPanel p5 = new JPanel();
-		p5.setLayout(new GridLayout(2,1));
+		p5.setLayout(new GridLayout(2, 1));
 		p5.setBorder(compound);
 		p5.add(p1);
 		p5.add(name, FlowLayout.CENTER);
@@ -272,6 +269,7 @@ public class MainPanel extends JPanel
 		p4.add(p5);
 		p4.setBackground(Color.black);
 		add(p4, BorderLayout.SOUTH);
+
 		repaint();
 
 	}
@@ -381,21 +379,25 @@ public class MainPanel extends JPanel
 		Graphics2D g2 = (Graphics2D) g;
 		if (Only_One == 0)
 		{
+			
 			g.drawImage(blank, 0, 0, null);
+			
+			la.ani_draw(g);
 		}
 		if (check_bg == 1)
 		{
 			if (Only_One == 1)
 			{
 				g.drawImage(abysss, 0, 0, null);
-			}
+			
 			if (rift_ani_check == 1)
 			{
 				rift_animate = new RiftThread();
 				rift_animate.start();
 				rift_ani_check = 0;
-			}			
+			}
 			rift_resource.draw(g);
+			}
 
 		} else
 		{
@@ -430,7 +432,7 @@ public class MainPanel extends JPanel
 		{
 			nidalee.draw(g2);
 		}
-		if(check_bg == 0)
+		if (check_bg == 0)
 		{
 			g.drawImage(snowani, 0, 0, this);
 			g.drawImage(snowani, 250, 0, this);
@@ -456,11 +458,11 @@ public class MainPanel extends JPanel
 	{
 		button1.character_select.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-				
+
 				try
 				{
 					BtnSound();
@@ -474,9 +476,9 @@ public class MainPanel extends JPanel
 				Object[] Field1 =
 				{ button1.character1, button1.character2, button1.character3,
 						button1.character4, button1.character5 };
-				JOptionPane.showOptionDialog(null,
-						"Select Character", "Select Character",
-						JOptionPane.DEFAULT_OPTION, 0, null, Field1, Field1[i]);
+				JOptionPane.showOptionDialog(null, "Select Character",
+						"Select Character", JOptionPane.DEFAULT_OPTION, 0,
+						null, Field1, Field1[i]);
 				try
 				{
 					BtnSound();
@@ -560,7 +562,8 @@ public class MainPanel extends JPanel
 					JFileChooser c = new JFileChooser();
 					// Demonstrate "Open" dialog:
 					int rVal = c.showSaveDialog(menu);
-					FileWriter fw = new FileWriter(c.getSelectedFile() + ".savelz");
+					FileWriter fw = new FileWriter(c.getSelectedFile()
+							+ ".savelz");
 					if (rVal == JFileChooser.APPROVE_OPTION)
 					{
 						menu.filename.setText(c.getSelectedFile().getName());
@@ -929,14 +932,15 @@ public class MainPanel extends JPanel
 			}
 
 		});
-		
+
 		PoroButton.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				Group2.clearSelection();
+				ChampionMove = 0;
 				try
 				{
 					BtnSound();
@@ -947,14 +951,15 @@ public class MainPanel extends JPanel
 				}
 			}
 		});
-		
+
 		RengarButton.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				Group2.clearSelection();
+				ChampionMove = 0;
 				try
 				{
 					BtnSound();
@@ -968,11 +973,12 @@ public class MainPanel extends JPanel
 
 		EliseButton.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				Group2.clearSelection();
+				ChampionMove = 0;
 				try
 				{
 					BtnSound();
@@ -983,14 +989,15 @@ public class MainPanel extends JPanel
 				}
 			}
 		});
-		
+
 		AhriButton.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				Group2.clearSelection();
+				ChampionMove = 0;
 				try
 				{
 					BtnSound();
@@ -1001,14 +1008,15 @@ public class MainPanel extends JPanel
 				}
 			}
 		});
-		
+
 		NidaleeButton.addActionListener(new ActionListener()
 		{
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
 				Group2.clearSelection();
+				ChampionMove = 0;
 				try
 				{
 					BtnSound();
@@ -1439,8 +1447,6 @@ public class MainPanel extends JPanel
 			}
 		}
 	}
-	
-	
 
 	public void input()
 	{
@@ -1597,5 +1603,61 @@ public class MainPanel extends JPanel
 	{
 
 		audio.play();
+	}
+
+	class LoginAnimation extends Thread
+	{
+		File file1 = new File(".\\Resource\\login_bg_left.png");
+		File file2 = new File(".\\Resource\\login_bg_right.png");
+		File file3 = new File(".\\Resource\\blank.png");
+
+		public int x1;
+
+		public LoginAnimation()
+		{
+			repaint();
+
+			start();
+		}
+
+		public void run()
+		{
+			for (int i = 0; i <= 400; i += 25)
+			{
+				System.out.println("ani");
+				x1 = i;
+				try
+				{
+					sleep(100);
+					if (x1 == 400)
+					{
+						System.out.println("stop");
+						this.stop();
+						this.interrupt();
+					}
+					repaint();
+				} catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		public void ani_draw(Graphics g)
+		{
+			g.drawImage(rifts, 0, 0, null);
+			try
+			{
+				Image img1 = ImageIO.read(file1);
+				Image img2 = ImageIO.read(file2);
+				g.drawImage(img1, (-x1) + 0, 0, null);
+				g.drawImage(img2, x1 + 400, 0, null);
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }
