@@ -501,7 +501,6 @@ public class MainPanel extends JPanel
 				{
 					menu = new MenuUI();
 					JFileChooser c = new JFileChooser();
-					// Demonstrate "Open" dialog:
 					int rVal = c.showOpenDialog(menu);
 					if (rVal == JFileChooser.APPROVE_OPTION)
 					{
