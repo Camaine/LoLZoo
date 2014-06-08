@@ -26,6 +26,7 @@ public class MainFrame
 class LoginPanel extends JFrame 
 {
 	AudioClip audio1 = Applet.newAudioClip(getClass().getResource("/LoginScreenLoop.wav"));
+	Register regit = new Register();
 	public LoginPanel()throws  MalformedURLException
 	{
 
@@ -36,7 +37,7 @@ class LoginPanel extends JFrame
 
 		final LoginStat ls = new LoginStat();
 		add(ls);
-
+		setResizable(false);
 		setVisible(true);
 
 		ls.login_btn.addActionListener(new ActionListener()
@@ -45,9 +46,9 @@ class LoginPanel extends JFrame
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-
-				if (ls.username.getText().equals("nosang")
-						&& ls.password.getText().equals("1234"))
+				regit.IdCheck(ls.username.getText());
+				regit.PwCheck(ls.password.getText());
+				if (regit.regit_check == 1)
 				{
 					audio1.stop();
 					ls.setVisible(false);
@@ -70,7 +71,27 @@ class LoginPanel extends JFrame
 			}
 
 		});
-		// setJMenuBar(menu.menubar);
+		
+		ls.regit_btn.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String value1, value2;
+				JTextField idinput = new JTextField(5);
+				JPasswordField pwinput = new JPasswordField(5);
+				Object[] Field = { "Your Username :", idinput, "Your Password :",
+						pwinput };
+				int option2 = JOptionPane.showConfirmDialog(null, Field);
+				value1 = idinput.getText();
+				value2 = pwinput.getText();
+				regit.IdAdd(value1);
+				regit.PwAdd(value2);
+				
+							
+			}
+			
+		});
 	}
 	
 	public void play_bgm()
@@ -83,6 +104,7 @@ class LoginPanel extends JFrame
 class LoginStat extends JPanel
 {
 	JButton login_btn = new JButton();
+	JButton regit_btn = new JButton();
 	JTextField username = new JTextField(10);
 	JPasswordField password = new JPasswordField(10);
 
@@ -92,11 +114,14 @@ class LoginStat extends JPanel
 		login_btn.setBounds(330, 380, 145, 32);
 		username.setBounds(325, 270, 150, 25);
 		password.setBounds(325, 340, 150, 25);
+		regit_btn.setBounds(330, 420, 145, 32);
 
 		try
 		{
 			Image img1 = ImageIO.read(getClass().getResource("/login_btn.png"));
+			Image img2 = ImageIO.read(getClass().getResource("/register_btn.png"));
 			login_btn.setIcon(new ImageIcon(img1));
+			regit_btn.setIcon(new ImageIcon(img2));
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -107,6 +132,7 @@ class LoginStat extends JPanel
 		add(username);
 		add(password);
 		add(login_btn);
+		add(regit_btn);
 
 	}
 

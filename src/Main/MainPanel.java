@@ -79,8 +79,10 @@ public class MainPanel extends JPanel
 	Image blank = ImageIO.read(getClass().getResource("/blank.png"));
 	RiftThread rift_animate;
 	AbyssThread abyss_animate;
+	SnowThread snow_animate;
 	RiftBackground rift_resource = new RiftBackground();
 	AbyssBackground abyss_resource = new AbyssBackground();
+	SnowAnimate snowanimate = new SnowAnimate();
 	LoginAnimation la = new LoginAnimation();
 	int rift_ani_check = 1;
 	int abyss_ani_check = 0;
@@ -164,7 +166,7 @@ public class MainPanel extends JPanel
 				{
 				case 101:
 				{
-					if (poro_patrol_check == 0)
+					if (poro_patrol_check == 0 && ChampionMove == 101)
 					{
 						poro.x1 = x1 - 60;
 						poro.y1 = y1 - 40;
@@ -173,7 +175,7 @@ public class MainPanel extends JPanel
 				}
 				case 102:
 				{
-					if (rengar_patrol_check == 0)
+					if (rengar_patrol_check == 0 && ChampionMove == 102)
 					{
 						rg.x1 = x1 - 50;
 						rg.y1 = y1 - 50;
@@ -384,6 +386,8 @@ public class MainPanel extends JPanel
 		{
 			if (Only_One == 1)
 			{
+				snow_animate.stop();
+				snow_animate.interrupt();
 				g.drawImage(abysss, 0, 0, null);
 				if (rift_ani_check == 1)
 				{
@@ -401,10 +405,13 @@ public class MainPanel extends JPanel
 			if (abyss_ani_check == 1)
 			{
 				abyss_animate = new AbyssThread();
+				snow_animate = new SnowThread();
+				snow_animate.start();
 				abyss_animate.start();
 				abyss_ani_check = 0;
 			}
 			abyss_resource.draw(g);
+			snowanimate.draw(g);
 		}
 
 		if (check_poro == 1)
@@ -433,12 +440,7 @@ public class MainPanel extends JPanel
 		}
 		if (check_bg == 0)
 		{
-			g.drawImage(snowani, 0, 0, this);
-			g.drawImage(snowani, 250, 0, this);
-			g.drawImage(snowani, 500, 0, this);
-			g.drawImage(snowani, 0, 250, this);
-			g.drawImage(snowani, 250, 250, this);
-			g.drawImage(snowani, 500, 250, this);
+			
 		}
 	}
 
@@ -1760,6 +1762,32 @@ public class MainPanel extends JPanel
 			{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+		}
+	}
+	
+	class SnowThread extends Thread
+	{
+
+		@SuppressWarnings("deprecation")
+		public void run()
+		{
+			for (int i = 0; i < 700; i += 10)
+			{
+				snowanimate.y1 = i;
+				try
+				{
+					sleep(100);
+					if (snowanimate.y1 == 600)
+					{
+						i = 100;
+					}
+					repaint();
+				} catch (InterruptedException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 	}

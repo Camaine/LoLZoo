@@ -19,6 +19,6 @@ public class SnowAnimate
 	
 	public void draw(Graphics g)
 	{
-		g.drawImage(img1, x1, y1, null);
+		g.drawImage(img1, 0, (-600)+y1, null);
 	}
 }
