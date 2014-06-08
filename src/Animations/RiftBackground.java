@@ -9,20 +9,13 @@ public class RiftBackground
 {
 	public int y1 = 600;
 
-	File file1 = new File(".\\Resource\\rift_sky.png");
-	File file2 = new File(".\\Resource\\rift_ground.png");
-	File file3 = new File(".\\Resource\\rift_sun.png");
-	File file4 = new File(".\\Resource\\rift_darkgrass.png");
-	File file5 = new File(".\\Resource\\rift_lightgrass.png");
-	File file6 = new File(".\\Resource\\rift_cloud.png");
-	File file7 = new File(".\\Resource\\rift_tower.png");
-	Image img1 = ImageIO.read(file1);
-	Image img2 = ImageIO.read(file2);
-	Image img3 = ImageIO.read(file3);
-	Image img4 = ImageIO.read(file4);
-	Image img5 = ImageIO.read(file5);
-	Image img6 = ImageIO.read(file6);
-	Image img7 = ImageIO.read(file7);
+	Image img1 = ImageIO.read(getClass().getResource("/rift_sky.png"));
+	Image img2 = ImageIO.read(getClass().getResource("/rift_ground.png"));
+	Image img3 = ImageIO.read(getClass().getResource("/rift_sun.png"));
+	Image img4 = ImageIO.read(getClass().getResource("/rift_darkgrass.png"));
+	Image img5 = ImageIO.read(getClass().getResource("/rift_lightgrass.png"));
+	Image img6 = ImageIO.read(getClass().getResource("/rift_cloud.png"));
+	Image img7 = ImageIO.read(getClass().getResource("/rift_tower.png"));
 
 	public RiftBackground() throws IOException
 	{

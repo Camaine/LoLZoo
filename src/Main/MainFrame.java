@@ -25,8 +25,7 @@ public class MainFrame
 
 class LoginPanel extends JFrame 
 {
-	File file1 = new File(".\\Resource\\LoginScreenLoop.wav");
-	AudioClip audio1 = Applet.newAudioClip(file1.toURI().toURL());
+	AudioClip audio1 = Applet.newAudioClip(getClass().getResource("/LoginScreenLoop.wav"));
 	public LoginPanel()throws  MalformedURLException
 	{
 
@@ -94,10 +93,9 @@ class LoginStat extends JPanel
 		username.setBounds(325, 270, 150, 25);
 		password.setBounds(325, 340, 150, 25);
 
-		Image img1;
 		try
 		{
-			img1 = ImageIO.read(new File(".\\Resource\\login_btn.png"));
+			Image img1 = ImageIO.read(getClass().getResource("/login_btn.png"));
 			login_btn.setIcon(new ImageIcon(img1));
 		} catch (IOException e)
 		{
@@ -114,11 +112,9 @@ class LoginStat extends JPanel
 
 	public void paintComponent(Graphics g)
 	{
-		File file = new File(".\\Resource\\login_bg.png");
-		Image bg;
 		try
 		{
-			bg = ImageIO.read(file);
+			Image bg = ImageIO.read(getClass().getResource("/login_bg.png"));
 			g.drawImage(bg, 0, 0, null);
 		} catch (IOException e)
 		{

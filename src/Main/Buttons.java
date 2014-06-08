@@ -51,11 +51,11 @@ public class Buttons extends JPanel
 		Font pt1 = new Font("Serif", Font.BOLD, 15);
 		try
 		{
-			Image img1 = ImageIO.read(new File(".\\Resource\\character_btn.png"));
+			Image img1 = ImageIO.read(getClass().getResource("/character_btn.png"));
 			character_select.setIcon(new ImageIcon(img1));
-			Image img2 = ImageIO.read(new File(".\\Resource\\save_btn.png"));
+			Image img2 = ImageIO.read(getClass().getResource("/save_btn.png"));
 			save_select.setIcon(new ImageIcon(img2));
-			Image img3 = ImageIO.read(new File(".\\Resource\\load_btn.png"));
+			Image img3 = ImageIO.read(getClass().getResource("/load_btn.png"));
 			load_select.setIcon(new ImageIcon(img3));
 		} catch (IOException ex)
 		{
@@ -84,7 +84,7 @@ public class Buttons extends JPanel
 	{
 		try
 		{
-			Image img = ImageIO.read(new File(".\\Resource\\poro_icon.jpg"));
+			Image img = ImageIO.read(getClass().getResource("/poro_icon.jpg"));
 			character1.setIcon(new ImageIcon(img));
 		} catch (IOException ex)
 		{
@@ -97,7 +97,7 @@ public class Buttons extends JPanel
 	{
 		try
 		{
-			Image img = ImageIO.read(new File(".\\Resource\\Rengar_icon.png"));
+			Image img = ImageIO.read(getClass().getResource("/Rengar_icon.png"));
 			character2.setIcon(new ImageIcon(img));
 		}catch(IOException ex)
 		{
@@ -110,7 +110,7 @@ public class Buttons extends JPanel
 	{
 		try
 		{
-			Image img = ImageIO.read(new File(".\\Resource\\elise_icon.png"));
+			Image img = ImageIO.read(getClass().getResource("/elise_icon.png"));
 			character3.setIcon(new ImageIcon(img));
 		}catch(IOException ex)
 		{
@@ -123,7 +123,7 @@ public class Buttons extends JPanel
 	{
 		try
 		{
-			Image img = ImageIO.read(new File(".\\Resource\\Ahri_icon.png"));
+			Image img = ImageIO.read(getClass().getResource("/Ahri_icon.png"));
 			character4.setIcon(new ImageIcon(img));
 		}catch(IOException ex)
 		{
@@ -136,7 +136,7 @@ public class Buttons extends JPanel
 	{
 		try
 		{
-			Image img = ImageIO.read(new File(".\\Resource\\Nidalee_icon.png"));
+			Image img = ImageIO.read(getClass().getResource("/Nidalee_icon.png"));
 			character5.setIcon(new ImageIcon(img));
 		}catch(IOException ex)
 		{
@@ -149,7 +149,7 @@ public class Buttons extends JPanel
 	{
 		try
 		{
-			Image img = ImageIO.read(new File(".\\Resource\\Nasus_icon.png"));
+			Image img = ImageIO.read(getClass().getResource("/Nasus_icon.png"));
 			character6.setIcon(new ImageIcon(img));
 		}catch(IOException ex)
 		{

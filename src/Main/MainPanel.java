@@ -35,12 +35,8 @@ public class MainPanel extends JPanel
 {
 	Image rifts, abysss;
 	Cursor Cursor;
-	File rift_bg = new File(".\\Resource\\Background.png");
-	File abyss_bg = new File(".\\Resource\\Background2.png");
-	File snow = new File(".\\Resource\\snow_ani.gif");
 	ImageIcon imageicon = new ImageIcon();
-	Image snowani = Toolkit.getDefaultToolkit().createImage(
-			".\\Resource\\snow_ani.gif");
+	Image snowani = Toolkit.getDefaultToolkit().createImage(getClass().getResource("/snow_ani.gif"));
 	Buttons button1 = new Buttons();
 	Random rd = new Random();
 	JRadioButton PoroButton = new JRadioButton();
@@ -80,14 +76,13 @@ public class MainPanel extends JPanel
 	NidaleePatrol nidalee_pat;
 	NasusPatrol nasus_pat;
 
-	File blank_file = new File(".\\Resource\\blank.png");
-	Image blank = ImageIO.read(blank_file);
+	Image blank = ImageIO.read(getClass().getResource("/blank.png"));
 	RiftThread rift_animate;
-	RiftBackground rift_resource = new RiftBackground();
-	int rift_ani_check = 1;
 	AbyssThread abyss_animate;
+	RiftBackground rift_resource = new RiftBackground();
 	AbyssBackground abyss_resource = new AbyssBackground();
 	LoginAnimation la = new LoginAnimation();
+	int rift_ani_check = 1;
 	int abyss_ani_check = 0;
 	int snow_ani_check = 0;
 
@@ -110,8 +105,6 @@ public class MainPanel extends JPanel
 	public int x1, y1, x2, y2;
 	public int ChampionMove, mousepress = 0, clickcount = 0;
 
-	int HowManyCome = 0;
-
 	int i;
 	int Only_One = 0;
 	int poro_patrol_check = 0;
@@ -123,12 +116,9 @@ public class MainPanel extends JPanel
 
 	int bgm = 1;
 	MoveSounds sounds = new MoveSounds();
-	File file = new File(".\\Resource\\button_click.wav");
-	AudioClip audio = Applet.newAudioClip(file.toURI().toURL());
-	File file2 = new File(".\\Resource\\Summoner_Rift_bgm.wav");
-	AudioClip audio2 = Applet.newAudioClip(file2.toURI().toURL());
-	File file1 = new File(".\\Resource\\Howling_Abyss_bgm.wav");
-	AudioClip audio1 = Applet.newAudioClip(file1.toURI().toURL());
+	AudioClip audio = Applet.newAudioClip(getClass().getResource("/button_click.wav"));
+	AudioClip audio2 = Applet.newAudioClip(getClass().getResource("/Summoner_Rift_bgm.wav"));
+	AudioClip audio1 = Applet.newAudioClip(getClass().getResource("/Howling_Abyss_bgm.wav"));
 
 	public ArrayList<Integer> data = new ArrayList<Integer>();
 
@@ -161,12 +151,10 @@ public class MainPanel extends JPanel
 		DeleteButton.setBackground(new Color(60, 60, 60));
 		rift.setBackground(new Color(60, 60, 60));
 		abyss.setBackground(new Color(60, 60, 60));
-		name.setIcon(new ImageIcon(ImageIO.read(new File(
-				".\\Resource\\name_label.png"))));
+		name.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("/name_label.png"))));
 		name.setBackground(new Color(60, 60, 60));
 		addMouseMotionListener(new MouseMotionListener()
 		{
-
 			@Override
 			public void mouseDragged(MouseEvent e)
 			{
@@ -176,7 +164,7 @@ public class MainPanel extends JPanel
 				{
 				case 101:
 				{
-					if (poro_patrol_check == 0 && HowManyCome == 0)
+					if (poro_patrol_check == 0)
 					{
 						poro.x1 = x1 - 60;
 						poro.y1 = y1 - 40;
@@ -185,7 +173,7 @@ public class MainPanel extends JPanel
 				}
 				case 102:
 				{
-					if (rengar_patrol_check == 0 && HowManyCome == 0)
+					if (rengar_patrol_check == 0)
 					{
 						rg.x1 = x1 - 50;
 						rg.y1 = y1 - 50;
@@ -194,8 +182,7 @@ public class MainPanel extends JPanel
 				}
 				case 103:
 				{
-					if (elise_patrol_check == 0 && HowManyCome == 0
-							&& ChampionMove == 103)
+					if (elise_patrol_check == 0 && ChampionMove == 103)
 					{
 						elise.x1 = x1 - 70;
 						elise.y1 = y1 - 70;
@@ -203,8 +190,7 @@ public class MainPanel extends JPanel
 				}
 				case 104:
 				{
-					if (ahri_patrol_check == 0 && HowManyCome == 0
-							&& ChampionMove == 104)
+					if (ahri_patrol_check == 0 && ChampionMove == 104)
 					{
 						ahri.x1 = x1 - 70;
 						ahri.y1 = y1 - 70;
@@ -212,8 +198,7 @@ public class MainPanel extends JPanel
 				}
 				case 105:
 				{
-					if (nidalee_patrol_check == 0 && HowManyCome == 0
-							&& ChampionMove == 105)
+					if (nidalee_patrol_check == 0 && ChampionMove == 105)
 					{
 						nidalee.x1 = x1 - 70;
 						nidalee.y1 = y1 - 70;
@@ -221,15 +206,13 @@ public class MainPanel extends JPanel
 				}
 				case 106:
 				{
-					if (nasus_patrol_check == 0 && HowManyCome == 0
-							&& ChampionMove == 106)
+					if (nasus_patrol_check == 0 && ChampionMove == 106)
 					{
 						nasus.x1 = x1 - 70;
 						nasus.y1 = y1 - 70;
 					}
 				}
 				}
-
 				repaint();
 			}
 
@@ -238,15 +221,11 @@ public class MainPanel extends JPanel
 			{
 				Icons();
 				setCursor(Cursor);
-
 			}
-
 		});
-		// addMouseListener(action);
-
 		button_action();
-		rifts = ImageIO.read(rift_bg);
-		abysss = ImageIO.read(abyss_bg);
+		rifts = ImageIO.read(getClass().getResource("/Background.png"));
+		abysss = ImageIO.read(getClass().getResource("/Background2.png"));
 
 		add(button1, BorderLayout.NORTH);
 		JPanel p1 = new JPanel();
@@ -286,9 +265,7 @@ public class MainPanel extends JPanel
 		p4.add(p5);
 		p4.setBackground(Color.black);
 		add(p4, BorderLayout.SOUTH);
-
 		repaint();
-
 	}
 
 	public class MouseListen implements MouseListener
@@ -296,117 +273,101 @@ public class MainPanel extends JPanel
 		@Override
 		public void mouseClicked(MouseEvent e) // 클릭해서 패트롤을 작동시킴
 		{
-			if (HowManyCome == 0)
+			if (clickcount == 2)
 			{
-				System.out.println(clickcount);
-				if (clickcount == 2)
+				clickcount = 0;
+				mousepress = 0;
+				if (PoroButton.isSelected() && PatrolButton.isSelected())
 				{
-					System.out.println("MainPanel_TAT");
-					clickcount = 0;
-					mousepress = 0;
-					if (PoroButton.isSelected() && PatrolButton.isSelected())
-					{
-						action_poro = new PatrolAction(x1, y1, x2, y2);
-						poro_patrol_check = 1;
-						poro_pat = new PoroPatrol();
-						poro_pat.start();
+					action_poro = new PatrolAction(x1, y1, x2, y2);
+					poro_patrol_check = 1;
+					poro_pat = new PoroPatrol();
+					poro_pat.start();
 
-					}
-					if (RengarButton.isSelected() && PatrolButton.isSelected())
-					{
-						int i = rd.nextInt(3);
-						sounds.rengar_move_sound.get(i).play();
-						action_rengar = new PatrolAction(x1, y1, x2, y2);
-						rengar_patrol_check = 1;
-						rengar_pat = new RengarPatrol();
-						rengar_pat.start();
-					}
-					if (EliseButton.isSelected() && PatrolButton.isSelected())
-					{
-						
-						int i = rd.nextInt(3);
-						sounds.elise_move_sound.get(i).play();
-						action_elise = new PatrolAction(x1, y1, x2, y2);
-						elise_patrol_check = 1;
-						elise_pat = new ElisePatrol();
-						elise_pat.start();
-					}
-					if (AhriButton.isSelected() && PatrolButton.isSelected())
-					{
-						int i = rd.nextInt(3);
-						sounds.ahri_move_sound.get(i).play();
-						action_ahri = new PatrolAction(x1, y1, x2, y2);
-						ahri_patrol_check = 1;
-						ahri_pat = new AhriPatrol();
-						ahri_pat.start();
-					}
-					if (NidaleeButton.isSelected() && PatrolButton.isSelected())
-					{
-						
-						int i = rd.nextInt(3);
-						sounds.nidalee_move_sound.get(i).play();
-						action_nidalee = new PatrolAction(x1, y1, x2, y2);
-						nidalee_patrol_check = 1;
-						nidalee_pat = new NidaleePatrol();
-						nidalee_pat.start();
-					}
-					if (NasusButton.isSelected() && PatrolButton.isSelected())
-					{
-						
-						int i = rd.nextInt(3);
-						sounds.nasus_move_sound.get(i).play();
-						action_nasus = new PatrolAction(x1, y1, x2, y2);
-						nasus_patrol_check = 1;
-						nasus_pat = new NasusPatrol();
-						nasus_pat.start();
-					}
-					removeMouseListener(Patroler);
-					Group2.clearSelection();
 				}
+				if (RengarButton.isSelected() && PatrolButton.isSelected())
+				{
+					int i = rd.nextInt(3);
+					sounds.rengar_move_sound.get(i).play();
+					action_rengar = new PatrolAction(x1, y1, x2, y2);
+					rengar_patrol_check = 1;
+					rengar_pat = new RengarPatrol();
+					rengar_pat.start();
+				}
+				if (EliseButton.isSelected() && PatrolButton.isSelected())
+				{
+
+					int i = rd.nextInt(3);
+					sounds.elise_move_sound.get(i).play();
+					action_elise = new PatrolAction(x1, y1, x2, y2);
+					elise_patrol_check = 1;
+					elise_pat = new ElisePatrol();
+					elise_pat.start();
+				}
+				if (AhriButton.isSelected() && PatrolButton.isSelected())
+				{
+					int i = rd.nextInt(3);
+					sounds.ahri_move_sound.get(i).play();
+					action_ahri = new PatrolAction(x1, y1, x2, y2);
+					ahri_patrol_check = 1;
+					ahri_pat = new AhriPatrol();
+					ahri_pat.start();
+				}
+				if (NidaleeButton.isSelected() && PatrolButton.isSelected())
+				{
+					int i = rd.nextInt(3);
+					sounds.nidalee_move_sound.get(i).play();
+					action_nidalee = new PatrolAction(x1, y1, x2, y2);
+					nidalee_patrol_check = 1;
+					nidalee_pat = new NidaleePatrol();
+					nidalee_pat.start();
+				}
+				if (NasusButton.isSelected() && PatrolButton.isSelected())
+				{
+					int i = rd.nextInt(3);
+					sounds.nasus_move_sound.get(i).play();
+					action_nasus = new PatrolAction(x1, y1, x2, y2);
+					nasus_patrol_check = 1;
+					nasus_pat = new NasusPatrol();
+					nasus_pat.start();
+				}
+				removeMouseListener(Patroler);
+				Group2.clearSelection();
 			}
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0)
 		{
-
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0)
 		{
-
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e)
 		{
-			if (HowManyCome == 0)
+			if (mousepress == 0)
 			{
-				if (mousepress == 0)
-				{
-					System.out.println("check1");
-					x1 = e.getX();
-					y1 = e.getY();
-					System.out.println("x1 :" + x1);
-					mousepress++;
-					clickcount = 1;
-				} else
-				{
-					System.out.println("check2");
-					x2 = e.getX();
-					y2 = e.getY();
-					System.out.println("x2 :" + x2);
-					mousepress = 0;
-					clickcount = 2;
-				}
+				x1 = e.getX();
+				y1 = e.getY();
+				mousepress++;
+				clickcount = 1;
+			} else
+			{
+				x2 = e.getX();
+				y2 = e.getY();
+				mousepress = 0;
+				clickcount = 2;
 			}
+
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0)
 		{
-
 		}
 
 	}
@@ -416,9 +377,7 @@ public class MainPanel extends JPanel
 		Graphics2D g2 = (Graphics2D) g;
 		if (Only_One == 0)
 		{
-
 			g.drawImage(blank, 0, 0, null);
-
 			la.ani_draw(g);
 		}
 		if (check_bg == 1)
@@ -426,7 +385,6 @@ public class MainPanel extends JPanel
 			if (Only_One == 1)
 			{
 				g.drawImage(abysss, 0, 0, null);
-
 				if (rift_ani_check == 1)
 				{
 					rift_animate = new RiftThread();
@@ -486,24 +444,18 @@ public class MainPanel extends JPanel
 
 	public void myCursor() throws IOException
 	{
-
 		Toolkit tk = Toolkit.getDefaultToolkit();
-
-		Image lol = ImageIO.read(new File(".\\Resource\\LoL_cursor.png"));
-
+		Image lol = ImageIO.read(getClass().getResource("/LoL_cursor.png"));
 		Cursor = tk.createCustomCursor(lol, new Point(10, 10), "OUR CURSOR");
-
 	}
 
 	public void button_action()
 	{
 		button1.character_select.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
-
 				try
 				{
 					BtnSound();
@@ -528,14 +480,11 @@ public class MainPanel extends JPanel
 				{
 					e.printStackTrace();
 				}
-
 			}
-
 		});
-
+		
 		button1.load_select.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -612,9 +561,7 @@ public class MainPanel extends JPanel
 						menu.dir.setText(c.getCurrentDirectory().toString());
 						for (int i = 0; i < data.size(); i++)
 						{
-							System.out.println("save");
 							fw.write(Integer.toString(data.get(count)));
-							System.out.println(data.get(count));
 							fw.write(" ");
 							count++;
 						}
@@ -630,14 +577,11 @@ public class MainPanel extends JPanel
 				{
 					e1.printStackTrace();
 				}
-
 			}
-
 		});
 
 		button1.character1.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -648,7 +592,6 @@ public class MainPanel extends JPanel
 				{
 					e.printStackTrace();
 				}
-				System.out.println("poro");
 				check_poro = 1;
 				repaint();
 			}
@@ -657,7 +600,6 @@ public class MainPanel extends JPanel
 
 		button1.character2.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -668,16 +610,13 @@ public class MainPanel extends JPanel
 				{
 					e.printStackTrace();
 				}
-				System.out.println("rengar");
 				check_rengar = 1;
 				repaint();
 			}
-
 		});
 
 		button1.character3.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -688,7 +627,6 @@ public class MainPanel extends JPanel
 				{
 					e.printStackTrace();
 				}
-				System.out.println("elise");
 				check_elise = 1;
 				repaint();
 			}
@@ -708,7 +646,6 @@ public class MainPanel extends JPanel
 				{
 					e.printStackTrace();
 				}
-				System.out.println("ahri");
 				check_ahri = 1;
 				repaint();
 			}
@@ -728,7 +665,6 @@ public class MainPanel extends JPanel
 				{
 					e.printStackTrace();
 				}
-				System.out.println("nidalee");
 				check_nidalee = 1;
 				repaint();
 			}
@@ -748,16 +684,13 @@ public class MainPanel extends JPanel
 				{
 					e.printStackTrace();
 				}
-				System.out.println("nidalee");
 				check_nasus = 1;
 				repaint();
 			}
-
 		});
 
 		PatrolButton.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
@@ -771,14 +704,11 @@ public class MainPanel extends JPanel
 				}
 				clickcount = 0;
 				PatrolActions();
-				// MoveActions();
 			}
-
 		});
 
 		MoveButton.addActionListener(new ActionListener()
 		{
-
 			@Override
 			public void actionPerformed(ActionEvent arg0)
 			{
@@ -787,19 +717,15 @@ public class MainPanel extends JPanel
 					BtnSound();
 				} catch (MalformedURLException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				// PatrolActions();
 				MoveActions();
 			}
-
 		});
 
 		StopButton.addActionListener(new ActionListener() // StopButton은 초기화를
 															// 해줌으로써 멈추는것을 유도한다.
 				{
-
 					@SuppressWarnings("deprecation")
 					@Override
 					public void actionPerformed(ActionEvent arg0)
@@ -834,8 +760,7 @@ public class MainPanel extends JPanel
 							elise_pat.stop();
 							elise_pat.interrupt();
 						}
-						if (AhriButton.isSelected() && StopButton.isSelected()
-								)
+						if (AhriButton.isSelected() && StopButton.isSelected())
 						{
 							ahri_patrol_check = 0;
 							ahri_pat.stop();
@@ -857,22 +782,12 @@ public class MainPanel extends JPanel
 							nasus_pat.interrupt();
 						}
 
-						System.out.println("STOP");
-
 						x1 = 0;
 						y1 = 0;
 						x2 = 0;
 						y2 = 0;
 						clickcount = 0;
 						mousepress = 0;
-						HowManyCome = 0; // HowManyCome 변수는 패트롤을 몇번 시행했는지
-											// 알려준다.(그냥 패트롤중엔 드래그불가변수)
-						/*
-						 * poro_patrol_check = 0; rengar_patrol_check = 0;
-						 * elise_patrol_check = 0; ahri_patrol_check = 0;
-						 * nidalee_patrol_check = 0;
-						 */// 이 변수는 Patrol버튼이 딱 1번만
-							// 작동시키도록 하기위한 변수다.
 						PatrolActions(); // 한번더 호출해줘서 지우도록함
 						MoveActions(); // Stop시 한번더 호출해서 초기상태로 되돌린다.
 						Group2.clearSelection();
@@ -1391,7 +1306,6 @@ public class MainPanel extends JPanel
 			{
 				while (true)
 				{
-					System.out.println(poro_patrol_check);
 					action_poro.PatrolActions();
 					poro.x1 = action_poro.getX1();
 					poro.y1 = action_poro.getY1();
@@ -1558,14 +1472,12 @@ public class MainPanel extends JPanel
 		{
 			for (int i = 600; i >= 0; i -= 50)
 			{
-				System.out.println("ani");
 				rift_resource.y1 = i;
 				try
 				{
 					sleep(100);
 					if (rift_resource.y1 == 0)
 					{
-						System.out.println("stop");
 						rift_animate.stop();
 						rift_animate.interrupt();
 					}
@@ -1588,25 +1500,21 @@ public class MainPanel extends JPanel
 		{
 			for (int i = 0; i <= 400; i += 50)
 			{
-				System.out.println("ani");
 				abyss_resource.x1 = i;
 				try
 				{
 					sleep(100);
-					if (abyss_resource.x1 == 400)
+					if (abyss_resource.x1 == 400 && rift_ani_check == 1)
 					{
-						System.out.println("stop");
-						if (rift_ani_check == 1)
-						{
-							rift_animate.stop();
-							rift_animate.interrupt();
-						}
+						rift_animate.stop();
+						rift_animate.interrupt();
 					}
 					repaint();
 				} catch (InterruptedException e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (NullPointerException e)
+				{
 				}
 			}
 		}
@@ -1662,7 +1570,6 @@ public class MainPanel extends JPanel
 		data.add(nasus.y1);
 		data.add(action_nasus.x1);
 		data.add(action_nasus.y1);
-		System.out.println(ahri.x1);
 	}
 
 	public void output()
@@ -1778,11 +1685,10 @@ public class MainPanel extends JPanel
 		PatrolActions(); // 한번더 호출해줘서 지우도록함
 		MoveActions(); // Stop시 한번더 호출해서 초기상태로 되돌린다.
 		Group2.clearSelection();
-		if(bgm == 1)
+		if (bgm == 1)
 		{
 			rift_ani_check = 1;
-		}
-		else
+		} else
 			abyss_ani_check = 1;
 		repaint();
 	}
@@ -1792,7 +1698,6 @@ public class MainPanel extends JPanel
 
 		if (bgm == 1)
 		{
-			System.out.println("riftbgm");
 			audio1.stop();
 			audio2.play();
 
@@ -1812,10 +1717,6 @@ public class MainPanel extends JPanel
 
 	class LoginAnimation extends Thread
 	{
-		File file1 = new File(".\\Resource\\login_bg_left.png");
-		File file2 = new File(".\\Resource\\login_bg_right.png");
-		File file3 = new File(".\\Resource\\blank.png");
-
 		public int x1;
 
 		public LoginAnimation()
@@ -1829,14 +1730,12 @@ public class MainPanel extends JPanel
 		{
 			for (int i = 0; i <= 400; i += 25)
 			{
-				System.out.println("ani");
 				x1 = i;
 				try
 				{
 					sleep(100);
 					if (x1 == 400)
 					{
-						System.out.println("stop");
 						this.stop();
 						this.interrupt();
 					}
@@ -1854,8 +1753,8 @@ public class MainPanel extends JPanel
 			g.drawImage(rifts, 0, 0, null);
 			try
 			{
-				Image img1 = ImageIO.read(file1);
-				Image img2 = ImageIO.read(file2);
+				Image img1 = ImageIO.read(getClass().getResource("/login_bg_left.png"));
+				Image img2 = ImageIO.read(getClass().getResource("/login_bg_right.png"));
 				g.drawImage(img1, (-x1) + 0, 0, null);
 				g.drawImage(img2, x1 + 400, 0, null);
 			} catch (IOException e)

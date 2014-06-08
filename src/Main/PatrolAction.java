@@ -7,7 +7,6 @@ public class PatrolAction
 	
 	public PatrolAction(int x1, int y1, int x2, int y2)
 	{
-		System.out.println("Save");
 		this.x1 = x1;
 		this.y1 = y1;
 		this.x2 = x2;
@@ -36,12 +35,6 @@ public class PatrolAction
 			ypoint1 = Ycheck2;
 			ypoint2 = Ycheck1;
 		}
-		System.out.println("xpoint1 :"+ xpoint1);
-		System.out.println("xpoint2 :"+ xpoint2);
-		System.out.println("ypoint1 :"+ ypoint1);
-		System.out.println("ypoint2 :"+ ypoint2);
-		System.out.println("xcheck :"+ xcheck);
-		System.out.println("ycheck :"+ ycheck);
 	}
 	
 	public PatrolAction()
@@ -51,14 +44,6 @@ public class PatrolAction
 
 	public void PatrolActions()
 	{
-		System.out.println("Patrol");
-		System.out.println("xpoint1 :"+ xpoint1);
-		System.out.println("xpoint2 :"+ xpoint2);
-		System.out.println("ypoint1 :"+ ypoint1);
-		System.out.println("ypoint2 :"+ ypoint2);
-		System.out.println("xcheck :"+ xcheck);
-		System.out.println("ycheck :"+ ycheck);
-				
 		if(x1 <= xpoint2)
 		{
 			if(xcheck == 0)			//초기상태이다.
@@ -77,9 +62,6 @@ public class PatrolAction
 			{
 				xcheck = 0;			//왼쪽끝에 도달했다는것을 알리기위해 xcheck = 0이된다.
 			}
-			
-			System.out.println(x1);
-			
 		}
 		if(y1 <=ypoint2)
 		{
@@ -99,7 +81,6 @@ public class PatrolAction
 			{
 				ycheck = 0;
 			}
-			System.out.println(y1);
 		}
 	}
 	public int getX1()

@@ -10,8 +10,7 @@ import javax.imageio.ImageIO;
 public class SnowAnimate
 {
 	public int x1, y1;
-	File file1 = new File(".\\Resource\\snow.png");
-	Image img1 = ImageIO.read(file1);
+	Image img1 = ImageIO.read(getClass().getResource("/snow.png"));
 	
 	public SnowAnimate() throws IOException
 	{

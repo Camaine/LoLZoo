@@ -5,8 +5,6 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.util.*;
-
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -28,7 +26,6 @@ public class MenuUI extends JFrame
 	PatrolAction action_elise = new PatrolAction();
 	PatrolAction action_ahri = new PatrolAction();
 	PatrolAction action_nidalee = new PatrolAction();
-	ArrayList<Integer> data = new ArrayList<Integer>();
 	
 	int count = 0;
 	
@@ -117,47 +114,4 @@ public class MenuUI extends JFrame
 			}
 		}
 	}
-	
-	/*public void input()
-	{
-		data.add(main.abyss_ani_check);
-		data.add(main.ahri_patrol_check);
-		data.add(main.ChampionMove);
-		data.add(main.check_ahri);
-		data.add(main.check_bg);
-		data.add(main.check_elise);
-		data.add(main.check_nidalee);
-		data.add(main.check_poro);
-		data.add(main.check_rengar);
-		data.add(main.clickcount);
-		data.add(main.elise_patrol_check);
-		data.add(main.mousepress);
-		data.add(main.nidalee_patrol_check);
-		data.add(main.rengar_patrol_check);
-		data.add(main.rift_ani_check);
-		data.add(main.x1);
-		data.add(main.x2);
-		data.add(main.y1);
-		data.add(main.y2);
-		data.add(poro.x1);
-		data.add(poro.y1);
-		data.add(action_poro.x1);
-		data.add(action_poro.y1);
-		data.add(rg.x1);
-		data.add(rg.y1);
-		data.add(action_rengar.x1);
-		data.add(action_rengar.y1);
-		data.add(elise.x1);
-		data.add(elise.y1);
-		data.add(action_elise.x1);
-		data.add(action_elise.y1);
-		data.add(main.ahri.x1);
-		data.add(main.ahri.y1);
-		data.add(action_ahri.x1);
-		data.add(action_ahri.y1);
-		data.add(nidalee.x1);
-		data.add(nidalee.y1);
-		data.add(action_nidalee.x1);
-		data.add(action_nidalee.y1);
-	}*/
 }

@@ -26,12 +26,9 @@ public class MoveSounds
 	
 	public void ahri_sounds() throws MalformedURLException
 	{
-		File file1 = new File(".\\Resource\\Sound\\Ahri\\Ahri_move1.wav");
-		File file2 = new File(".\\Resource\\Sound\\Ahri\\Ahri_move2.wav");
-		File file3 = new File(".\\Resource\\Sound\\Ahri\\Ahri_move6.wav");
-		AudioClip ahri_move_sound1 = Applet.newAudioClip(file1.toURI().toURL());
-		AudioClip ahri_move_sound2 = Applet.newAudioClip(file2.toURI().toURL());
-		AudioClip ahri_move_sound3 = Applet.newAudioClip(file3.toURI().toURL());
+		AudioClip ahri_move_sound1 = Applet.newAudioClip(getClass().getResource("/Sound/Ahri/Ahri_move1.wav"));
+		AudioClip ahri_move_sound2 = Applet.newAudioClip(getClass().getResource("/Sound/Ahri/Ahri_move2.wav"));
+		AudioClip ahri_move_sound3 = Applet.newAudioClip(getClass().getResource("/Sound/Ahri/Ahri_move6.wav"));
 		ahri_move_sound.add(ahri_move_sound1);
 		ahri_move_sound.add(ahri_move_sound2);
 		ahri_move_sound.add(ahri_move_sound3);
@@ -39,12 +36,9 @@ public class MoveSounds
 	
 	public void elise_sounds() throws MalformedURLException
 	{
-		File file1 = new File(".\\Resource\\Sound\\Elise\\Elise_move1.wav");
-		File file2 = new File(".\\Resource\\Sound\\Elise\\Elise_move3.wav");
-		File file3 = new File(".\\Resource\\Sound\\Elise\\Elise_move5.wav");
-		AudioClip elise_move_sound1 = Applet.newAudioClip(file1.toURI().toURL());
-		AudioClip elise_move_sound2 = Applet.newAudioClip(file2.toURI().toURL());
-		AudioClip elise_move_sound3 = Applet.newAudioClip(file3.toURI().toURL());
+		AudioClip elise_move_sound1 = Applet.newAudioClip(getClass().getResource("/Sound/Elise/Elise_move1.wav"));
+		AudioClip elise_move_sound2 = Applet.newAudioClip(getClass().getResource("/Sound/Elise/Elise_move3.wav"));
+		AudioClip elise_move_sound3 = Applet.newAudioClip(getClass().getResource("/Sound/Elise/Elise_move5.wav"));
 		elise_move_sound.add(elise_move_sound1);
 		elise_move_sound.add(elise_move_sound2);
 		elise_move_sound.add(elise_move_sound3);
@@ -52,12 +46,9 @@ public class MoveSounds
 	
 	public void nasus_sounds() throws MalformedURLException
 	{
-		File file1 = new File(".\\Resource\\Sound\\Nasus\\Nasus_move1.wav");
-		File file2 = new File(".\\Resource\\Sound\\Nasus\\Nasus_move2.wav");
-		File file3 = new File(".\\Resource\\Sound\\Nasus\\Nasus_move3.wav");
-		AudioClip nasus_move_sound1 = Applet.newAudioClip(file1.toURI().toURL());
-		AudioClip nasus_move_sound2 = Applet.newAudioClip(file2.toURI().toURL());
-		AudioClip nasus_move_sound3 = Applet.newAudioClip(file3.toURI().toURL());
+		AudioClip nasus_move_sound1 = Applet.newAudioClip(getClass().getResource("/Sound/Nasus/Nasus_move1.wav"));
+		AudioClip nasus_move_sound2 = Applet.newAudioClip(getClass().getResource("/Sound/Nasus/Nasus_move2.wav"));
+		AudioClip nasus_move_sound3 = Applet.newAudioClip(getClass().getResource("/Sound/Nasus/Nasus_move3.wav"));
 		nasus_move_sound.add(nasus_move_sound1);
 		nasus_move_sound.add(nasus_move_sound2);
 		nasus_move_sound.add(nasus_move_sound3);
@@ -65,12 +56,9 @@ public class MoveSounds
 	
 	public void nidalee_sounds() throws MalformedURLException
 	{
-		File file1 = new File(".\\Resource\\Sound\\Nidalee\\Nidalee_move1.wav");
-		File file2 = new File(".\\Resource\\Sound\\Nidalee\\Nidalee_move2.wav");
-		File file3 = new File(".\\Resource\\Sound\\Nidalee\\Nidalee_move3.wav");
-		AudioClip nidalee_move_sound1 = Applet.newAudioClip(file1.toURI().toURL());
-		AudioClip nidalee_move_sound2 = Applet.newAudioClip(file2.toURI().toURL());
-		AudioClip nidalee_move_sound3 = Applet.newAudioClip(file3.toURI().toURL());
+		AudioClip nidalee_move_sound1 = Applet.newAudioClip(getClass().getResource("/Sound/Nidalee/Nidalee_move1.wav"));
+		AudioClip nidalee_move_sound2 = Applet.newAudioClip(getClass().getResource("/Sound/Nidalee/Nidalee_move2.wav"));
+		AudioClip nidalee_move_sound3 = Applet.newAudioClip(getClass().getResource("/Sound/Nidalee/Nidalee_move3.wav"));
 		nidalee_move_sound.add(nidalee_move_sound1);
 		nidalee_move_sound.add(nidalee_move_sound2);
 		nidalee_move_sound.add(nidalee_move_sound3);
@@ -78,12 +66,9 @@ public class MoveSounds
 	
 	public void rengar_sounds() throws MalformedURLException
 	{
-		File file1 = new File(".\\Resource\\Sound\\Rengar\\Rengar_move1.wav");
-		File file2 = new File(".\\Resource\\Sound\\Rengar\\Rengar_move2.wav");
-		File file3 = new File(".\\Resource\\Sound\\Rengar\\Rengar_move4.wav");
-		AudioClip rengar_move_sound1 = Applet.newAudioClip(file1.toURI().toURL());
-		AudioClip rengar_move_sound2 = Applet.newAudioClip(file2.toURI().toURL());
-		AudioClip rengar_move_sound3 = Applet.newAudioClip(file3.toURI().toURL());
+		AudioClip rengar_move_sound1 = Applet.newAudioClip(getClass().getResource("/Sound/Rengar/Rengar_move1.wav"));
+		AudioClip rengar_move_sound2 = Applet.newAudioClip(getClass().getResource("/Sound/Rengar/Rengar_move2.wav"));
+		AudioClip rengar_move_sound3 = Applet.newAudioClip(getClass().getResource("/Sound/Rengar/Rengar_move4.wav"));
 		rengar_move_sound.add(rengar_move_sound1);
 		rengar_move_sound.add(rengar_move_sound2);
 		rengar_move_sound.add(rengar_move_sound3);
